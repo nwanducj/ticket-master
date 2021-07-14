@@ -179,9 +179,17 @@
     <SideOrderSummary
       class="summary"
       @clickContinue="clickContinue"
+      :totalPayment="totalPayment"
       v-if="!continueClicked"
     />
-    <SideOrderSignUp class="summary" @goBack="goBack" v-if="continueClicked" />
+    <SideOrderSignUp
+      class="summary"
+      @goBack="goBack"
+      v-if="continueClicked"
+      :totalPayment="totalPayment"
+      :user="user"
+      @paymentCompleted="$emit('paymentCompleted')"
+    />
   </div>
 </template>
 
@@ -191,10 +199,16 @@ import SideOrderSummary from "@/components/SideOrderSummary.vue";
 import SideOrderSignUp from "@/components/SideOrderSignUp.vue";
 export default {
   name: "Payment",
-  props: ["closePayment"],
+  props: ["closePayment", "paymentCompleted"],
   data() {
     return {
+      user: {
+        fullname: "Chidike Nwandu",
+        email: "chidikenwandu@gmail.com",
+        phoneNumber: "08102829960",
+      },
       continueClicked: false,
+      totalPayment: 11000,
     };
   },
   components: {
@@ -207,6 +221,9 @@ export default {
     },
     clickContinue: function () {
       this.continueClicked = true;
+      const script = document.createElement("script");
+      script.src = "https://ravemodal-dev.herokuapp.com/v3.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
     },
     goBack: function () {
       this.continueClicked = false;

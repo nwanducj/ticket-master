@@ -1,15 +1,12 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <div style="position: relative; height: 100vh; z-index: 2">
       <div class="side">
         <div class="side__one">
           <div class="side__one__date">8th February 2019</div>
-          <div class="side__one__title">The Nathan Cole Experience</div>
+          <div class="side__one__title">{{ event.name }}</div>
           <div class="side__one__desc">
-            Two-Time Grammy Award winner, Nathaniel Cole, who’s also just
-            released an album, Into The Wild, will be having his first concert
-            in Lagos, Nigeria! Fans have waited so long for this announcement,
-            and it promises to be everything anyone has imagined.
+            {{ event.description }}
           </div>
           <div class="side__one__price">N5000 - N200,000</div>
           <div v-if="false" class="side__one__price free">FREE</div>
@@ -17,7 +14,10 @@
           <button v-if="false" @click="gotoPayment">REGISTER FOR FREE</button>
         </div>
         <div class="side__two">
-          <img src="@/assets/images/Event-image-1.png" alt="event image" />
+          <img
+            :src="event.image || '@/assets/images/Event-image-1.png'"
+            :alt="event.tags"
+          />
         </div>
       </div>
       <svg
@@ -33,7 +33,7 @@
 
       <div class="down">
         <div class="address">
-          <div class="address__title">VENUE</div>
+          <div class="address__title">{{ event.venue }}</div>
           <div class="address__name">
             Eko Atlantic Beach, Off Ahmadu Bello way, Victoria Island, Lagos.
           </div>
@@ -82,7 +82,7 @@
           <div class="address__title">DATE AND TIME</div>
           <div class="address__name">Friday, February 8th 2019, 10:00pm</div>
           <div class="social">SOCIAL LINKS</div>
-          <ul>
+          <ul v-for="(links, i) in event.social_links" :key="i">
             <li>
               <a href="https://www.nathanielcole.com"
                 >http://www.nathanielcole.com</a
@@ -102,10 +102,19 @@
         </div>
       </div>
     </div>
-    <BlackOverlay class="overlay" v-if="false" />
-    <ThankYouMessage class="register" v-if="false" />
-    <Register class="register" v-if="false" />
-    <Payment class="payment" v-if="payment" @closePayment="closePayment" />
+    <BlackOverlay class="overlay" v-if="overlay" />
+    <ThankYouMessage
+      class="register"
+      v-if="completeSuccess"
+      @closeThankYouMessage="closeThankYouMessage"
+    />
+    <Register class="register" v-if="register" @closeRegister="closeRegister" />
+    <Payment
+      class="payment"
+      v-if="payment"
+      @closePayment="closePayment"
+      @paymentCompleted="paymentCompleted"
+    />
     <!-- <div
       style="
         position: absolute;
@@ -328,11 +337,17 @@ import BlackOverlay from "@/components/BlackOverlay";
 import ThankYouMessage from "../components/ThankYouMessage.vue";
 import Register from "../components/Register.vue";
 import Payment from "../components/Payment.vue";
+const axios = require("axios");
 export default {
   name: "Event",
   data() {
     return {
+      overlay: false,
       payment: false,
+      register: false,
+      event: {},
+      loading: false,
+      completeSucesss: false,
     };
   },
   components: { BlackOverlay, ThankYouMessage, Register, Payment },
@@ -343,12 +358,42 @@ export default {
     closePayment: function () {
       this.payment = false;
     },
+    paymentCompleted: function () {
+      this.payment = false;
+      this.overlay = true;
+      this.completeSuccess = true;
+    },
+    closeRegister: function () {
+      this.register = false;
+      this.overlay = false;
+    },
+    closeThankYouMessage: function () {
+      this.overlay = false;
+      this.completeSuccess = false;
+    },
+  },
+
+  created() {
+    let id = this.$route.params.event_id;
+    axios
+      .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
+      .then((response) => {
+        let list = response.data;
+        console.log(list.data.events);
+        this.event = list.data;
+        console.log(list.data);
+        this.loading = false;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
 <style scoped lang="scss">
 .register {
-  top: 10%;
+  position: fixed;
+  margin: 40px 0 0 0;
 }
 .payment {
   position: fixed;
@@ -362,6 +407,7 @@ export default {
   height: 100vh;
   width: 100vw;
   background-color: black;
+  z-index: 3;
 }
 .side {
   display: flex;

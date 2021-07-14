@@ -25,6 +25,7 @@
           <div>REGISTER FOR FREE</div>
 
           <svg
+            @click="$emit('closeRegister')"
             width="24"
             height="24"
             viewBox="0 0 24 24"

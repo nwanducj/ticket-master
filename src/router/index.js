@@ -12,7 +12,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/event:event_id',
+    path: '/event/:event_id',
     name: 'Event',
     // meta: { layout: "payment" },
     component: Event

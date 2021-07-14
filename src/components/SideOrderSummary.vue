@@ -74,7 +74,7 @@ export default {
   data() {
     return {};
   },
-  props: ["clickContinue"],
+  props: ["clickContinue", "totalPayment"],
   methods: {
     goNext: function () {
       this.$emit("clickContinue");

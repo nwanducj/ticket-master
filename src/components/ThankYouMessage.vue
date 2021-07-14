@@ -16,6 +16,7 @@
       <div class="card">
         <div style="float: right">
           <svg
+            @click="$emit('closeThankYouMessage')"
             width="24"
             height="24"
             viewBox="0 0 24 24"

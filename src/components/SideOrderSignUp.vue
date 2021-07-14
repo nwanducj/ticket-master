@@ -39,17 +39,17 @@
       </div>
       <form>
         <label for="full name" class="label">Full name</label>
-        <input type="text" id="full name" />
+        <input v-model="person.fullname" type="text" id="full name" />
         <label for="email address" class="label">Email address</label>
-        <input type="text" id="email address" />
+        <input v-model="person.email" type="text" id="email address" />
         <label for="phone number" class="label">Phone number</label>
-        <input type="text" id="phone number" />
+        <input v-model="person.phoneNumber" type="text" id="phone number" />
       </form>
       <div class="flex money">
         <div class="total">TOTAL PAYMENT</div>
-        <div class="price">N110,000</div>
+        <div class="price">N{{ totalPayment }}</div>
       </div>
-      <button type="submit">PAY N110,000</button>
+      <button @click="atFlutterwave">N{{ totalPayment }}</button>
       <div class="flexx">
         <div class="verified">
           <svg
@@ -80,13 +80,64 @@
 export default {
   name: "SideOrderSignUp",
   data() {
-    return {};
+    return {
+      person: {
+        fullname: "",
+        email: "",
+        phoneNumber: "",
+      },
+      flwKey: "FLWPUBK_TEST-b8c8e75ce8f503e20479433b751d8692-X",
+      currency: "NGN",
+      country: "NG",
+    };
   },
-  props: ["goBack"],
+  props: ["goBack", "totalPayment", "user", "paymentCompleted"],
+  computed: {
+    referenceFlutter() {
+      const date = Date.now();
+      return `FUND_ACCOUNT-${this.person.firstName}-${this.totalPayment}-${date}`;
+    },
+  },
   methods: {
     goPrev: function () {
       this.$emit("goBack");
     },
+
+    atFlutterwave: function () {
+      window.FlutterwaveCheckout({
+        public_key: this.flwKey,
+        tx_ref: this.referenceFlutter,
+        amount: this.totalPayment,
+        currency: this.currency,
+        phone_number: this.person.phoneNumber,
+        payment_options: "CARD",
+        customer: {
+          name: `${this.person.fullname}`,
+          email: this.person.email,
+        },
+
+        callback: (response) => this.callbackFlutter(response),
+        customizations: {
+          title: "Nexbuy District | Wallet Funding",
+          description: "Funding wallet",
+          logo: "https://firebasestorage.googleapis.com/v0/b/nexbuy-d2da3.appspot.com/o/emailPictures%2FB1.png?alt=media&token=426d5cd2-3618-45c9-9c6d-bb301123b7ee",
+        },
+        close: this.closeFlutter(),
+      });
+    },
+    callbackFlutter: function () {
+      console.log("Proceeding to payment");
+      this.$emit("paymentCompleted");
+    },
+    closeFlutter: function () {
+      console.log("Proceeding to payment");
+      this.$emit("paymentCompleted");
+    },
+  },
+  created() {
+    if (this.user) {
+      this.person = this.user;
+    }
   },
 };
 </script>

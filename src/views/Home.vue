@@ -6,7 +6,7 @@
         <div
           v-for="(event, i) in events"
           :key="i"
-          @click="$router.push(`/event:${event.id}`)"
+          @click="$router.push(`/event/${event.id}`)"
         >
           <div class="event" v-if="!event.is_sold_out">
             <img
@@ -81,7 +81,6 @@ export default {
       text-align: left;
     }
     &__price {
-      font-family: Flutterwave;
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
