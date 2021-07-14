@@ -8,31 +8,34 @@
           font-size: 0.9rem;
           font-weight: 700;
         "
+        @click="goPrev"
       >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style="margin: 0 5px 0 0"
-        >
-          <path
-            d="M19 12H5"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M12 19L5 12L12 5"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        Go back
+        <button class="back">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style="margin: 0 5px 0 0"
+          >
+            <path
+              d="M19 12H5"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 19L5 12L12 5"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Go back
+        </button>
       </div>
       <form>
         <label for="full name" class="label">Full name</label>
@@ -78,6 +81,12 @@ export default {
   name: "SideOrderSignUp",
   data() {
     return {};
+  },
+  props: ["goBack"],
+  methods: {
+    goPrev: function () {
+      this.$emit("goBack");
+    },
   },
 };
 </script>
@@ -157,5 +166,23 @@ form {
 }
 .money {
   margin: 20px 0;
+}
+.back {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 0;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  height: 36.6px;
+  font-size: 12.2px;
+  line-height: 14.64px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4.06px;
+  letter-spacing: 0.51px;
+  box-shadow: 0px 0 0px 0px white;
 }
 </style>

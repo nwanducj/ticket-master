@@ -1,6 +1,6 @@
 <template>
   <div class="head">
-    <div class="head__logo">
+    <div class="head__logo" @click="$router.push('/')">
       <svg
         width="173"
         height="34"

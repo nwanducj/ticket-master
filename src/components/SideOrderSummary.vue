@@ -41,7 +41,7 @@
         <div>Total Payment</div>
         <div>N111,000</div>
       </div>
-      <button type="submit">CONTINUE</button>
+      <button @click="goNext">CONTINUE</button>
       <div class="guarantee mt-1" style="margin: 10px 0">
         <div style="margin: 0 10px 0 0">
           <svg
@@ -73,6 +73,12 @@ export default {
   name: "SideOrderSummary",
   data() {
     return {};
+  },
+  props: ["clickContinue"],
+  methods: {
+    goNext: function () {
+      this.$emit("clickContinue");
+    },
   },
 };
 </script>

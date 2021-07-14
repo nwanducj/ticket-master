@@ -30,7 +30,7 @@ export default {
 #app {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   margin: 0;
   background-color: #f2f2f2;
 }

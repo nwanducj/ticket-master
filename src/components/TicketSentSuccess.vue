@@ -30,16 +30,15 @@
         Your tickets have been confirmed and sent to your email address at
         <a href="#">ted@flutterwave.com</a>
       </div>
-      <button type="submit">BUY MORE TICKETs</button>
+      <button @click="$router.push('/')">BUY MORE TICKETs</button>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
 export default {
-  name: "Ticket Request Success",
+  name: "TicketSentSuccess",
   components: {},
 };
 </script>

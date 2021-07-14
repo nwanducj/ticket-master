@@ -1,10 +1,10 @@
 <template>
   <div id="default">
+    <DesktopHeader class="header" />
     <main>
-      <DesktopHeader class="header" />
       <slot />
-      <Footer class="footer" />
     </main>
+    <Footer class="footer" />
   </div>
 </template>
 
@@ -26,7 +26,9 @@ export default {
 #default {
   background-color: #f2f2f2;
   height: 100%;
+  width: 100%;
 }
+
 .header {
   width: 81.5%;
   margin: 0 auto;
