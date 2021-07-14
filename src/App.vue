@@ -1,30 +1,47 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
-  <router-view/>
 </template>
+<script>
+const DefaultLayout = "default";
+import Default from "@/layouts/default";
+import Payment from "@/layouts/payment";
 
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    Default,
+    Payment,
+  },
+  computed: {
+    layout() {
+      console.log(this.$route.meta.layout);
+      return this.$route.meta.layout || DefaultLayout;
+    },
+  },
+};
+</script>
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #f2f2f2;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.header {
+  width: 81.5%;
+  margin: 0 auto;
+}
+.footer {
+  width: 83%;
+  margin: 0 auto 100px auto;
+  position: absolute;
+  left: 10%;
 }
 </style>
