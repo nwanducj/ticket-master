@@ -1,75 +1,70 @@
 <template>
   <div
     style="
-      width: 100vw;
       z-index: 50;
       position: fixed;
-      top: 0;
-      height: 100vh;
-      padding: auto 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     "
   >
-    <div class="main">
-      <!-- <div class="express">
-          <div>Enter your email and we’ll send your tickets right away!</div>
-        </div> -->
-      <div class="card">
-        <div style="float: right">
-          <svg
-            @click="$emit('closeThankYouMessage')"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18 6L6 18"
-              stroke="#333333"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M6 6L18 18"
-              stroke="#333333"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div style="margin-top: 50px">
-          <svg
-            width="137"
-            height="137"
-            viewBox="0 0 137 137"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M125.583 63.2476V68.4993C125.576 80.8089 121.59 92.7864 114.22 102.646C106.849 112.505 96.4894 119.717 84.685 123.207C72.8806 126.698 60.2642 126.278 48.7174 122.013C37.1707 117.747 27.3122 109.862 20.6124 99.5359C13.9126 89.2093 10.7303 76.9937 11.5402 64.7108C12.3502 52.4279 17.1089 40.7358 25.1067 31.3784C33.1045 22.021 43.9128 15.4996 55.9197 12.7868C67.9267 10.074 80.4889 11.3151 91.7328 16.3251"
-              stroke="#F5A623"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M125.583 22.8335L68.5 79.9739L51.375 62.8489"
-              stroke="#F5A623"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <div class="desc">
-            Your tickets have been confirmed and sent to your email address at
-            <a href="#">ted@flutterwave.com</a>
-          </div>
+    <div class="card">
+      <div style="float: right">
+        <svg
+          @click="$emit('closeThankYouMessage')"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18 6L6 18"
+            stroke="#333333"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M6 6L18 18"
+            stroke="#333333"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <div style="margin-top: 50px">
+        <svg
+          width="137"
+          height="137"
+          viewBox="0 0 137 137"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M125.583 63.2476V68.4993C125.576 80.8089 121.59 92.7864 114.22 102.646C106.849 112.505 96.4894 119.717 84.685 123.207C72.8806 126.698 60.2642 126.278 48.7174 122.013C37.1707 117.747 27.3122 109.862 20.6124 99.5359C13.9126 89.2093 10.7303 76.9937 11.5402 64.7108C12.3502 52.4279 17.1089 40.7358 25.1067 31.3784C33.1045 22.021 43.9128 15.4996 55.9197 12.7868C67.9267 10.074 80.4889 11.3151 91.7328 16.3251"
+            stroke="#F5A623"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M125.583 22.8335L68.5 79.9739L51.375 62.8489"
+            stroke="#F5A623"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <div class="desc">
+          Your tickets have been confirmed and sent to your email address at
+          <a href="#">ted@flutterwave.com</a>
         </div>
       </div>
     </div>
   </div>
+  <div class="overlay"></div>
 </template>
 
 <script>
@@ -83,10 +78,14 @@ export default {
 
 
 <style scoped lang="scss">
-.main {
-  display: flex;
-  align-items: center;
-  justify-items: center;
+.overlay {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+  z-index: 2;
+  position: fixed;
+  top: 0;
 }
 .express > div {
   display: inline;
@@ -114,10 +113,8 @@ input {
   border: 1px solid darken(#f2f2f2, 10);
 }
 .card {
-  width: 25%;
-  margin: 0px auto;
+  width: 320px;
   background-color: white;
-  height: 100%;
   padding: 30px 30px 70px 30px;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #aaaaaa;

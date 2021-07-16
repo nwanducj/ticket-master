@@ -29,15 +29,20 @@
         </button>
       </div>
       <div class="title__holder">
-        <div class="title">The Nathan Cole Experience</div>
+        <div class="title">{{ cart.name }}</div>
         <div class="date">8TH FEBRUARY 2019</div>
       </div>
-      <div class="" v-for="i in 3" :key="i">
-        <div class="flex tm">
-          <div>Regular</div>
-          <div>N10,000</div>
+      <div class="">
+        <div
+          class="flex tm"
+          v-for="(varieties, i) in cart.varieties"
+          :key="varieties"
+        >
+          <div style="width: 30%">{{ varieties.name }}</div>
+          <div style="width: 30%">{{ varieties.price }}</div>
           <div style="display: flex; align-items: center">
             <svg
+              @click="decreaseQyt(i)"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -87,8 +92,9 @@
                 </filter>
               </defs>
             </svg>
-            <div class="qyt">1</div>
+            <div class="qyt">{{ varieties.qyt }}</div>
             <svg
+              @click="increaseQyt(i)"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -180,6 +186,7 @@
       class="summary"
       @clickContinue="clickContinue"
       :totalPayment="totalPayment"
+      :cart="cart"
       v-if="!continueClicked"
     />
     <SideOrderSignUp
@@ -197,9 +204,16 @@
 // @ is an alias to /src
 import SideOrderSummary from "@/components/SideOrderSummary.vue";
 import SideOrderSignUp from "@/components/SideOrderSignUp.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "Payment",
   props: ["closePayment", "paymentCompleted"],
+  computed: {
+    ...mapGetters({
+      userDto: "getUser",
+      cart: "getCartList",
+    }),
+  },
   data() {
     return {
       user: {
@@ -207,6 +221,8 @@ export default {
         email: "chidikenwandu@gmail.com",
         phoneNumber: "08102829960",
       },
+      props: [],
+      cartList: [],
       continueClicked: false,
       totalPayment: 11000,
     };
@@ -228,6 +244,25 @@ export default {
     goBack: function () {
       this.continueClicked = false;
     },
+    increaseQyt(i) {
+      this.cart.varieties[i].qyt += 1;
+    },
+    decreaseQyt(i) {
+      if (this.cart.varieties[i].qyt > 0) {
+        this.cart.varieties[i].qyt -= 1;
+      }
+      if (
+        this.cart.varieties[0].qyt == 0 &&
+        this.cart.varieties[1].qyt == 0 &&
+        this.cart.varieties[2].qyt == 0
+      ) {
+        this.close();
+      }
+    },
+  },
+  mounted() {
+    this.user = this.userDto;
+    console.log(this.cart);
   },
 };
 </script>

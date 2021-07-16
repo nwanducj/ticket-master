@@ -23,7 +23,7 @@
       </svg>
     </div>
     <div class="head__button">
-      <div class="text__button">I didn’t get my tickets</div>
+      <button class="text__button">I didn’t get my tickets</button>
       <div><button>CREATE YOUR OWN EVENT</button></div>
     </div>
   </div>
@@ -68,7 +68,12 @@ export default {
     font-weight: 700;
     line-height: 16.8px;
     letter-spacing: 0.51px;
-    margin-top: 37px;
+    margin-top: 20px 0 20px 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: black;
+    box-shadow: 0 0 0 0px #00000080;
+    width: 180px;
   }
   .head__logo {
     margin-top: 24px;

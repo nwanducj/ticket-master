@@ -8,7 +8,7 @@
 <script>
 const DefaultLayout = "default";
 import Default from "@/layouts/default";
-import Payment from "@/layouts/payment";
+import Test from "@/layouts/test";
 
 export default {
   data() {
@@ -16,11 +16,11 @@ export default {
   },
   components: {
     Default,
-    Payment,
+
+    Test,
   },
   computed: {
     layout() {
-      console.log(this.$route.meta.layout);
       return this.$route.meta.layout || DefaultLayout;
     },
   },
@@ -32,7 +32,7 @@ export default {
   width: 100vw;
   // height: 100vh;
   margin: 0;
-  background-color: #f2f2f2;
+  // background-color: #f2f2f2;
 }
 .header {
   width: 81.5%;

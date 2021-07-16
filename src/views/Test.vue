@@ -1,46 +1,17 @@
 <template>
   <div class="holder" v-if="!loading">
     <div class="tag">The best events happening now.</div>
-    <div style="width: 80%; margin: 0 auto">
-      <div class="events">
-        <div
-          v-for="(event, i) in events"
-          :key="i"
-          @click="$router.push(`/event/${event.id}`)"
-        >
-          <div class="event" v-if="!event.is_sold_out">
-            <img
-              v-if="event.image !== null"
-              :src="event.image"
-              alt="event image"
-              style="width: 300px"
-            />
-            <img
-              v-if="event.image == null"
-              src="@/assets/images/Event-image.png"
-              alt="event image"
-              style="width: 300px; height: 200px"
-            />
-            <div style="width: 300px" class="event__date">
-              {{ event.start_time }}
-            </div>
-            <div style="width: 300px" class="event__name">{{ event.name }}</div>
-            <div
-              style="width: 300px"
-              class="event__price"
-              v-if="!event.is_free"
-            >
-              N5000 - N200,000
-            </div>
-            <div class="event__price" v-if="event.is_free">FREE</div>
-          </div>
-        </div>
-      </div>
+    <div style="margin: 0 auto; width: 600px">
+      <Photogrid
+        :events="events"
+        style="width: 50vw; background-color: yellow"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Photogrid from "../components/Photogrid.vue";
 // @ is an alias to /src
 const axios = require("axios");
 export default {
@@ -51,7 +22,7 @@ export default {
       events: [],
     };
   },
-  components: {},
+  components: { Photogrid },
   created() {
     axios
       .get("https://eventsflw.herokuapp.com/v1/events")
@@ -68,10 +39,14 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.photogrid {
+  width: 50vw;
+  background-color: yellow;
+}
 .events {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-gap: 10px;
 
   .event {
     &__date {
@@ -115,6 +90,13 @@ export default {
   text-align: left;
 }
 .holder {
-  width: 100vw;
+  height: 100vh;
+  background-color: red;
+  height: 70vh;
+  overflow: hidden;
+  position: relative;
+}
+.holder::-webkit-scrollbar {
+  display: none;
 }
 </style>

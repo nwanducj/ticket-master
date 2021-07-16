@@ -11,13 +11,9 @@
       >
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
-      <div class="flex">
-        <div>2-Regular</div>
-        <div>N10,000</div>
-      </div>
-      <div class="flex">
-        <div>1-VIP</div>
-        <div>N100,000</div>
+      <div class="flex" v-for="(varieties, i) in getCart" :key="i">
+        <div>{{ varieties.name }}</div>
+        <div>{{ varieties.price }}</div>
       </div>
       <svg
         class="mt-8"
@@ -30,15 +26,15 @@
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
       <div class="flex">
-        <div>2-Regular</div>
+        <div>Sub-total</div>
         <div>N10,000</div>
       </div>
       <div class="flex">
-        <div>2-Regular</div>
+        <div>VAT</div>
         <div>N10,000</div>
       </div>
       <div class="flex">
-        <div>Total Payment</div>
+        <div>Total PAYMENT</div>
         <div>N111,000</div>
       </div>
       <button @click="goNext">CONTINUE</button>
@@ -74,7 +70,18 @@ export default {
   data() {
     return {};
   },
-  props: ["clickContinue", "totalPayment"],
+  props: ["clickContinue", "totalPayment", "cart"],
+  computed: {
+    getCart() {
+      let cartList = [];
+      this.cart.varieties.forEach((item) => {
+        if (item.qyt > 0) {
+          cartList.push(item);
+        }
+      });
+      return cartList;
+    },
+  },
   methods: {
     goNext: function () {
       this.$emit("clickContinue");

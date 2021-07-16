@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Event from '../views/Event.vue'
-import Payment from '../views/Payment.vue'
+import Test from '../views/Test.vue'
 import TicketRequest from '../views/TicketRequest.vue'
-import TicketRequestSuccess from '../views/TicketRequestSuccess.vue'
 
 const routes = [
   {
@@ -17,22 +16,18 @@ const routes = [
     // meta: { layout: "payment" },
     component: Event
   },
-  {
-    path: '/payment',
-    name: 'Payment',
-    meta: { layout: "payment" },
-    component: Payment
-  },
+
   {
     path: '/ticket-request',
     name: 'Ticket Request',
     component: TicketRequest
   },
   {
-    path: '/ticket-request-success',
-    name: 'Ticket Request Success',
-    component: TicketRequestSuccess
-  }
+    path: '/test',
+    name: 'Test',
+    meta: { layout: "test" },
+    component: Test
+  },
 ]
 
 const router = createRouter({
