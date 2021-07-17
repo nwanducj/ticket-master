@@ -92,7 +92,10 @@ export default {
           phoneNumber: this.phoneNumber,
           fullname: this.fullname,
         })
-        .then(this.close());
+        .then(() => {
+          this.$emit("continueFromRegister");
+          this.close();
+        });
     },
   },
 };

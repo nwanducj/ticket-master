@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!loading" style="height: 78vh">
+    <div v-if="!loading" style="height: 100%">
       <div class="" style="padding: 50px 0">
         <div class="" style="display: flex; width: 63%; margin: 0 auto">
           <div class="" style="width: 50%">
@@ -144,6 +144,7 @@
           class="register"
           v-if="register"
           @closeRegister="closeRegister"
+          @continueFromRegister="continueFromRegister"
         />
         <Payment
           class="payment"
@@ -364,6 +365,7 @@ import { formatCurrency } from "../static/utils.js";
 import ThankYouMessage from "../components/ThankYouMessage.vue";
 import Register from "../components/Register.vue";
 import Payment from "../components/Payment.vue";
+import { mapGetters } from "vuex";
 const axios = require("axios");
 export default {
   name: "Event",
@@ -377,7 +379,11 @@ export default {
     };
   },
   components: { ThankYouMessage, Register, Payment },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      user: "getUser",
+    }),
+  },
   methods: {
     getFormattedPrice: function (price) {
       console.log(price);
@@ -393,6 +399,15 @@ export default {
       return formated_date;
     },
     gotoPayment: function () {
+      if (!this.user) {
+        this.register = true;
+      } else {
+        let event = { ...this.event };
+        this.$store.dispatch("setCartList", event).then((this.loading = false));
+        this.payment = true;
+      }
+    },
+    continueFromRegister() {
       let event = { ...this.event };
       this.$store.dispatch("setCartList", event).then((this.loading = false));
       this.payment = true;

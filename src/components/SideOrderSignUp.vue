@@ -47,9 +47,11 @@
       </form>
       <div class="flex money">
         <div class="total">TOTAL PAYMENT</div>
-        <div class="price">N{{ totalPayment }}</div>
+        <div class="price">N{{ getFormattedPrice(totalPayment) }}</div>
       </div>
-      <button @click="atFlutterwave">N{{ totalPayment }}</button>
+      <button @click="atFlutterwave">
+        N{{ getFormattedPrice(totalPayment) }}
+      </button>
       <div class="flexx">
         <div class="verified">
           <svg
@@ -77,6 +79,8 @@
 </template>
 
 <script>
+import { formatCurrency } from "../static/utils.js";
+import { mapGetters } from "vuex";
 export default {
   name: "SideOrderSignUp",
   data() {
@@ -97,10 +101,18 @@ export default {
       const date = Date.now();
       return `FUND_ACCOUNT-${this.person.firstName}-${this.totalPayment}-${date}`;
     },
+    ...mapGetters({
+      userDto: "getUser",
+      cart: "getCartList",
+    }),
   },
   methods: {
     goPrev: function () {
       this.$emit("goBack");
+    },
+    getFormattedPrice: function (price) {
+      console.log(price);
+      return formatCurrency(price);
     },
 
     atFlutterwave: function () {
