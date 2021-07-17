@@ -421,6 +421,7 @@ export default {
 <style scoped lang="scss">
 .event {
   padding: 25px 0;
+
   &__detail {
     display: block;
     width: 80%;
@@ -468,7 +469,7 @@ export default {
   &__venue__text {
     margin: 0 0 0 0;
     font-weight: 500;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   &__fulldate {
     margin: 10px 0;
@@ -499,6 +500,7 @@ export default {
     width: 100%;
   }
   &__free {
+    color: green;
   }
 }
 img {
@@ -582,8 +584,8 @@ a {
       margin: 0 auto;
     }
     &__venue {
-      width: 80%;
-      margin: 0px 0 0 0;
+      width: 50%;
+      margin: 0 0 0 0;
     }
     &__date {
       margin: 0 0 0px 0;
@@ -591,9 +593,9 @@ a {
       font-size: 0.8rem;
     }
     &__venue__text {
-      margin: 0 0 0px 0;
+      margin: 0 0 10px 0;
       font-weight: 500;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
     &__fulldate {
       margin: 10px 0;
@@ -601,7 +603,8 @@ a {
       font-size: 1.2rem;
     }
     &__address {
-      margin: 10px 0;
+      margin: 0 15px 10px 0;
+      padding: 0 15px 0 0;
       font-weight: 700;
       font-size: 1.2rem;
     }
@@ -668,20 +671,6 @@ a {
     color: grey;
   }
 
-  .payment {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 6;
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    z-index: 10;
-  }
   button {
     background-color: #f5a623;
     border: none;

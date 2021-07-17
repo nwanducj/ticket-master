@@ -54,7 +54,7 @@ export default {
     margin-top: 15px;
     margin-left: -15px;
     width: 172.23px;
-    height: 34;
+    height: 34px;
   }
   &__button {
     display: none;
@@ -95,6 +95,7 @@ export default {
       color: black;
       box-shadow: 0 0 0 0px #00000080;
       width: 180px;
+      display: inline-block;
     }
     .head__logo {
       margin-top: 24px;
