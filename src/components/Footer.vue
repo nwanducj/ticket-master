@@ -1,11 +1,11 @@
 <template>
-  <div class="flex">
+  <footer class="flex">
     <div class="terms">Copyright 2019. Flutterwave inc</div>
     <div class="terms">
       <div>Terms and condition</div>
       <div class="policy">Policy Privacy</div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

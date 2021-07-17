@@ -269,18 +269,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 .main {
-  padding: 40px 0;
+  padding: 0px 0;
 }
 .express > div {
   display: inline;
-  padding: 0 30%;
-  width: 25%;
+  margin-top: 20px;
+  padding: 0 10%;
+  width: 100vw;
   text-align: center;
 }
 .express {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -304,7 +305,7 @@ button {
 input {
   outline: none;
   border: none;
-  background-color: lighten(#f2f2f2, 3);
+  background-color: white;
   padding: 10px 10px 10px 10px;
   border-radius: 5px;
   box-sizing: border-box;
@@ -313,28 +314,27 @@ input {
   border: 1px solid darken(#f2f2f2, 10);
 }
 .card {
-  width: 25%;
+  width: 300px;
   margin: 0px auto;
-  background-color: white;
+  background-color: #f2f2f2;
   height: 100%;
   padding: 50px 30px;
   border-radius: 10px;
-  box-shadow: 0px 4px 4px 0px #00000040;
+  box-shadow: 0px 0px 0px 0px #00000040;
 }
 .label {
   font-size: 0.9rem;
   color: #333333;
 }
 .card-success {
-  width: 25%;
+  width: 300px;
   margin: 0px auto;
-  background-color: white;
+  background-color: #f2f2f2;
   height: 100%;
   padding: 70px 30px;
   border-radius: 10px;
-  box-shadow: 1px 1px 1px #aaaaaa;
   text-align: center;
-  box-shadow: 0px 4px 4px 0px #00000040;
+  box-shadow: 0px 0px 0px 0px #00000040;
 }
 a {
   text-decoration: none;
@@ -342,5 +342,82 @@ a {
 }
 .descp {
   margin: 15px 0;
+}
+@media screen and (min-width: 768px) {
+  .main {
+    padding: 40px 0;
+  }
+  .express > div {
+    display: inline;
+    padding: 0 30%;
+    width: 25%;
+    text-align: center;
+  }
+  .express {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  button {
+    background-color: #faa800;
+    border: none;
+    color: white;
+    padding: 13px 16px 13px 16px;
+    width: 100%;
+    height: 36.6px;
+    font-size: 12.2px;
+    line-height: 14.64px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4.06px;
+    letter-spacing: 0.51px;
+    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+  }
+  input {
+    outline: none;
+    border: none;
+    background-color: lighten(#f2f2f2, 3);
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 2px 0px 10px 0px;
+    border: 1px solid darken(#f2f2f2, 10);
+  }
+  .card {
+    width: 25%;
+    margin: 0px auto;
+    background-color: white;
+    height: 100%;
+    padding: 50px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+  .label {
+    font-size: 0.9rem;
+    color: #333333;
+  }
+  .card-success {
+    width: 25%;
+    margin: 0px auto;
+    background-color: white;
+    height: 100%;
+    padding: 70px 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #aaaaaa;
+    text-align: center;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+  a {
+    text-decoration: none;
+    color: cadetblue;
+  }
+  .descp {
+    margin: 15px 0;
+  }
 }
 </style>

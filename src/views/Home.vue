@@ -13,13 +13,11 @@
               v-if="event.image !== null"
               :src="event.image"
               alt="event image"
-              style="width: 100%"
             />
             <img
               v-if="event.image == null"
               src="@/assets/images/Event-image.png"
               alt="event image"
-              style="width: 358px; height: 242px"
             />
 
             <div style="width: 300px" class="event__date">
@@ -87,7 +85,7 @@ export default {
 <style scoped lang="scss">
 .events {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 10px;
 
   .event {
@@ -116,24 +114,73 @@ export default {
       margin: 0 0 10px 0;
     }
     img {
-      width: 100%;
-      height: 100%;
+      width: 300px;
+      height: 200px;
       border-radius: 5px;
     }
   }
 }
 .tag {
-  width: 76%;
+  width: 80%;
   margin: 40px auto 20px auto;
-  font-size: 2rem;
-  font-size: 36px;
+  font-size: 1.3rem;
   font-style: normal;
   font-weight: 900;
   line-height: 40px;
   letter-spacing: 0px;
   text-align: left;
 }
-.holder {
-  width: 100vw;
+@media screen and (min-width: 768px) {
+  .events {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+
+    .event {
+      &__date {
+        font-size: 10px;
+        line-height: 14px;
+        letter-spacing: 0px;
+        text-align: left;
+        margin: 5px 0 0px 0;
+      }
+      &__name {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+        letter-spacing: 0px;
+        text-align: left;
+      }
+      &__price {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 17px;
+        letter-spacing: 0.5px;
+        text-align: left;
+        margin: 0 0 10px 0;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+      }
+    }
+  }
+  .tag {
+    width: 76%;
+    margin: 40px auto 20px auto;
+    font-size: 2rem;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 40px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+  .holder {
+    width: 100vw;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="head">
+  <header class="head">
     <div class="head__logo" @click="$router.push('/')">
       <svg
         width="173"
@@ -26,7 +26,7 @@
       <button class="text__button">I didn’t get my tickets</button>
       <div><button>CREATE YOUR OWN EVENT</button></div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -45,43 +45,65 @@ export default {
   justify-content: space-between;
 
   button {
-    background-color: #f5a623;
-    border: none;
-    color: white;
-    padding: 13px 16px 13px 16px;
-    width: 206px;
-    height: 36.6px;
-    font-size: 12px;
-    line-height: 14.64px;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-    margin-left: 38px;
-    margin-top: 24px;
-    display: inline-block;
-    border-radius: 4.06px;
-    letter-spacing: 0.51px;
-    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+    display: none;
   }
   .text__button {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16.8px;
-    letter-spacing: 1px;
-    margin-top: 20px 0 20px 0;
-    padding: 0;
-    background-color: #f2f2f2;
-    color: black;
-    box-shadow: 0 0 0 0px #00000080;
-    width: 180px;
+    display: none;
   }
   .head__logo {
-    margin-top: 24px;
+    margin-top: 15px;
+    margin-left: -15px;
     width: 172.23px;
     height: 34;
   }
+  &__button {
+    display: none;
+  }
 }
-.head__button {
-  display: flex;
+@media screen and (min-width: 768px) {
+  .head {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background-color: #f5a623;
+      border: none;
+      color: white;
+      padding: 13px 16px 13px 16px;
+      width: 206px;
+      height: 36.6px;
+      font-size: 12px;
+      line-height: 14.64px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      margin-left: 38px;
+      margin-top: 24px;
+      display: inline-block;
+      border-radius: 4.06px;
+      letter-spacing: 0.51px;
+      box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+    }
+    .text__button {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 1px;
+      margin-top: 20px 0 20px 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: black;
+      box-shadow: 0 0 0 0px #00000080;
+      width: 180px;
+    }
+    .head__logo {
+      margin-top: 24px;
+      width: 172.23px;
+      height: 34;
+    }
+    &__button {
+      display: flex;
+    }
+  }
 }
 </style>
