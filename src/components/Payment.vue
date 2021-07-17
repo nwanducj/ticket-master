@@ -30,7 +30,7 @@
       </div>
       <div class="title__holder">
         <div class="title">{{ cart.name }}</div>
-        <div class="date">8TH FEBRUARY 2019</div>
+        <div class="date">{{ getDate(cart.start_time) }}</div>
       </div>
       <div class="">
         <div
@@ -39,7 +39,7 @@
           :key="varieties"
         >
           <div style="width: 30%">{{ varieties.name }}</div>
-          <div style="width: 30%">{{ varieties.price }}</div>
+          <div style="width: 30%">{{ getFormattedPrice(varieties.price) }}</div>
           <div style="display: flex; align-items: center">
             <svg
               @click="decreaseQyt(i)"
@@ -168,18 +168,14 @@
           width: 277px;
           height: 28px;
           left: 133px;
-
           font-family: Flutterwave;
           font-size: 14px;
           line-height: 28px;
-
-          /* identical to box height, or 200% */
           letter-spacing: 0.5px;
-
           color: #828282;
         "
       >
-        Ticket sales ends on 22nd November 2019
+        Ticket sales ends on {{ getDate(cart.tickets_sale_end_date) }}
       </div>
     </div>
     <SideOrderSummary
@@ -202,6 +198,7 @@
 
 <script>
 // @ is an alias to /src
+import { formatCurrency } from "../static/utils.js";
 import SideOrderSummary from "@/components/SideOrderSummary.vue";
 import SideOrderSignUp from "@/components/SideOrderSignUp.vue";
 import { mapGetters } from "vuex";
@@ -217,9 +214,9 @@ export default {
   data() {
     return {
       user: {
-        fullname: "Chidike Nwandu",
-        email: "chidikenwandu@gmail.com",
-        phoneNumber: "08102829960",
+        fullname: "",
+        email: "",
+        phoneNumber: "",
       },
       props: [],
       cartList: [],
@@ -232,6 +229,19 @@ export default {
     SideOrderSignUp,
   },
   methods: {
+    getFormattedPrice: function (price) {
+      console.log(price);
+      return formatCurrency(price);
+    },
+    getDate(date) {
+      let new_date = new Date(date);
+      let formated_date = new_date.toLocaleString("en-US", {
+        day: "numeric", // numeric, 2-digit
+        year: "numeric", // numeric, 2-digit
+        month: "long", // numeric, 2-digit, long, short, narrow
+      });
+      return formated_date;
+    },
     close: function () {
       this.$emit("closePayment");
     },
@@ -246,10 +256,12 @@ export default {
     },
     increaseQyt(i) {
       this.cart.varieties[i].qyt += 1;
+      this.$store.dispatch("updateCart", this.cart);
     },
     decreaseQyt(i) {
       if (this.cart.varieties[i].qyt > 0) {
         this.cart.varieties[i].qyt -= 1;
+        this.$store.dispatch("updateCart", this.cart);
       }
       if (
         this.cart.varieties[0].qyt == 0 &&
@@ -261,8 +273,10 @@ export default {
     },
   },
   mounted() {
-    this.user = this.userDto;
-    console.log(this.cart);
+    if (this.userDto) {
+      this.user = this.userDto;
+      console.log(this.cart);
+    }
   },
 };
 </script>

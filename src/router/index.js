@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Event from '../views/Event.vue'
-import Test from '../views/Test.vue'
 import TicketRequest from '../views/TicketRequest.vue'
 
 const routes = [
@@ -21,12 +20,6 @@ const routes = [
     path: '/ticket-request',
     name: 'Ticket Request',
     component: TicketRequest
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    meta: { layout: "test" },
-    component: Test
   },
 ]
 

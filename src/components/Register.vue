@@ -20,7 +20,7 @@
         <div>REGISTER FOR FREE</div>
 
         <svg
-          @click="$emit('closeRegister')"
+          @click="close"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -57,14 +57,14 @@
         <div class="desc">
           <form>
             <label for="full name" class="label">Full name</label>
-            <input type="text" id="full name" />
+            <input v-model="fullname" type="text" id="full name" />
             <label for="email address" class="label">Email address</label>
-            <input type="text" id="email address" />
+            <input v-model="email" type="text" id="email address" />
             <label for="phone number" class="label">Phone number</label>
-            <input type="text" id="phone number" />
+            <input v-model="phoneNumber" type="text" id="phone number" />
           </form>
         </div>
-        <button type="submit">REGISTER</button>
+        <button type="submit" @click="setUser">REGISTER</button>
       </div>
     </div>
   </div>
@@ -73,9 +73,27 @@
 
 <script>
 export default {
-  name: "ThankYouMessage",
+  name: "Register",
   data() {
-    return {};
+    return {
+      fullname: "",
+      email: "",
+      phoneNumber: "",
+    };
+  },
+  methods: {
+    close() {
+      this.$emit("closeRegister");
+    },
+    setUser: function () {
+      this.$store
+        .dispatch("setUser", {
+          email: this.email,
+          phoneNumber: this.phoneNumber,
+          fullname: this.fullname,
+        })
+        .then(this.close());
+    },
   },
 };
 </script>

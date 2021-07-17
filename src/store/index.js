@@ -23,7 +23,9 @@ export default createStore({
   },
   actions: {
     getUser() { },
-    setUser() { },
+    setUser(context, user) {
+      context.commit("SET_USER", user);
+    },
     //give comment on it
     //explain to a layman
     setCartList(context, event) {
@@ -45,6 +47,7 @@ export default createStore({
           name: "VIP"
         },
       ]
+      cart.vat = 500
       localStorage.setItem("cart", JSON.stringify(cart));
       context.commit("SET_CARTLIST", cart);
     },

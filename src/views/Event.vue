@@ -4,7 +4,7 @@
       <div class="" style="padding: 50px 0">
         <div class="" style="display: flex; width: 63%; margin: 0 auto">
           <div class="" style="width: 50%">
-            <div class="">8th February 2019</div>
+            <div class="">{{ getDate(event.start_time) }}</div>
             <div class="" style="font-size: 1.8rem; margin: 10px 0">
               {{ event.name }}
             </div>
@@ -18,15 +18,17 @@
               "
             >
               {{ event.description }} Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Ea dolores maiores unde facilis ipsam quos autem
-              reprehenderit velit corporis aspernatur, modi quibusdam odit?
+              adipisicing elit. Ea dolores maiatur,dolor sit amet consectetur,
+              adipisicing elit. Ea dolores maiatur, modi quibusdam odit?
             </div>
-            <div class="" style="font-size: 1rem; margin: 15px 0">
-              N5000 - N200,000
+            <div v-if="event" class="" style="font-size: 1rem; margin: 15px 0">
+              {{ getFormattedPrice(5000) }} - {{ getFormattedPrice(10000) }}
             </div>
-            <div v-if="false" class="">FREE</div>
-            <button @click="gotoPayment">BUY NOW</button>
-            <button v-if="false" @click="gotoPayment">REGISTER FOR FREE</button>
+            <div v-if="event.is_free" class="">FREE</div>
+            <button v-if="!event.is_free" @click="gotoPayment">BUY NOW</button>
+            <button v-if="event.is_free" @click="gotoPayment">
+              REGISTER FOR FREE
+            </button>
           </div>
           <div class="" style="width: 50%">
             <img
@@ -116,7 +118,7 @@
               class=""
               style="margin: 10px 0; font-weight: 700; font-size: 1.2rem"
             >
-              Friday, February 8th 2019, 10:00pm
+              {{ getDate(event.start_time) }}
             </div>
             <div
               class=""
@@ -358,6 +360,7 @@
 
 <script>
 // @ is an alias to /src
+import { formatCurrency } from "../static/utils.js";
 import ThankYouMessage from "../components/ThankYouMessage.vue";
 import Register from "../components/Register.vue";
 import Payment from "../components/Payment.vue";
@@ -366,7 +369,6 @@ export default {
   name: "Event",
   data() {
     return {
-      overlay: false,
       payment: false,
       register: false,
       event: {},
@@ -375,7 +377,21 @@ export default {
     };
   },
   components: { ThankYouMessage, Register, Payment },
+  computed: {},
   methods: {
+    getFormattedPrice: function (price) {
+      console.log(price);
+      return formatCurrency(price);
+    },
+    getDate(date) {
+      let new_date = new Date(date);
+      let formated_date = new_date.toLocaleString("en-US", {
+        day: "numeric", // numeric, 2-digit
+        year: "numeric", // numeric, 2-digit
+        month: "long", // numeric, 2-digit, long, short, narrow
+      });
+      return formated_date;
+    },
     gotoPayment: function () {
       let event = { ...this.event };
       this.$store.dispatch("setCartList", event).then((this.loading = false));
@@ -391,7 +407,6 @@ export default {
     },
     closeRegister: function () {
       this.register = false;
-      this.overlay = false;
     },
     closeThankYouMessage: function () {
       this.overlay = false;
@@ -401,18 +416,20 @@ export default {
 
   created() {
     let id = this.$route.params.event_id;
-    axios
-      .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
-      .then((response) => {
-        let list = response.data;
-        console.log(list.data.events);
-        this.event = list.data;
-        console.log(list.data);
-        this.loading = false;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      axios
+        .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
+        .then((response) => {
+          let list = response.data;
+          this.event = list.data;
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

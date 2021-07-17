@@ -12,8 +12,8 @@
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
       <div class="flex" v-for="(varieties, i) in getCart" :key="i">
-        <div>{{ varieties.name }}</div>
-        <div>{{ varieties.price }}</div>
+        <div>{{ varieties.qyt }} - {{ varieties.name }}</div>
+        <div>{{ getFormattedPrice(varieties.price * varieties.qyt) }}</div>
       </div>
       <svg
         class="mt-8"
@@ -27,15 +27,15 @@
       </svg>
       <div class="flex">
         <div>Sub-total</div>
-        <div>N10,000</div>
+        <div>{{ getFormattedPrice(getSubTotal) }}</div>
       </div>
       <div class="flex">
         <div>VAT</div>
-        <div>N10,000</div>
+        <div>{{ getFormattedPrice(cart.vat) }}</div>
       </div>
       <div class="flex">
-        <div>Total PAYMENT</div>
-        <div>N111,000</div>
+        <div>TOTAL PAYMENT</div>
+        <div>{{ getFormattedPrice(cart.vat + getSubTotal) }}</div>
       </div>
       <button @click="goNext">CONTINUE</button>
       <div class="guarantee mt-1" style="margin: 10px 0">
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { formatCurrency } from "../static/utils.js";
 export default {
   name: "SideOrderSummary",
   data() {
@@ -81,8 +82,24 @@ export default {
       });
       return cartList;
     },
+    getSubTotal() {
+      let total = 0;
+      this.cart.varieties.forEach((item) => {
+        if (item.qyt > 0) {
+          total += item.price * item.qyt * 1;
+          console.log(total);
+        }
+      });
+
+      return total;
+    },
+    // getTotal() {},
   },
   methods: {
+    getFormattedPrice: function (price) {
+      console.log(price);
+      return formatCurrency(price);
+    },
     goNext: function () {
       this.$emit("clickContinue");
     },

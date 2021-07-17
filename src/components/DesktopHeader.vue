@@ -65,9 +65,9 @@ export default {
   }
   .text__button {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 16.8px;
-    letter-spacing: 0.51px;
+    letter-spacing: 1px;
     margin-top: 20px 0 20px 0;
     padding: 0;
     background-color: #f2f2f2;

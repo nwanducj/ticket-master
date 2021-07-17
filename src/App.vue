@@ -8,7 +8,6 @@
 <script>
 const DefaultLayout = "default";
 import Default from "@/layouts/default";
-import Test from "@/layouts/test";
 
 export default {
   data() {
@@ -16,8 +15,6 @@ export default {
   },
   components: {
     Default,
-
-    Test,
   },
   computed: {
     layout() {
