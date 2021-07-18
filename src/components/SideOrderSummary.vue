@@ -16,7 +16,15 @@
         <div>{{ getFormattedPrice(varieties.price * varieties.qyt) }}</div>
       </div>
       <svg
-        class="mt-8"
+        width="100%"
+        height="1"
+        viewBox="0 0 368 1"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" /></svg
+      ><svg
+        class=""
         width="100%"
         height="1"
         viewBox="0 0 368 1"
@@ -111,11 +119,12 @@ export default {
 <style lang="scss" scoped>
 .holder {
   background-color: white;
-  height: 100vh;
+  border-radius: 20px 20px 0 0;
+  // height: 100vh;
 }
 .hold {
   width: 80%;
-  margin: 60px auto;
+  margin: 30px auto;
 }
 .flex {
   display: flex;
@@ -148,5 +157,47 @@ button {
 }
 .money-2 {
   font-size: 0.8rem;
+}
+@media screen and (min-width: 768px) {
+  .holder {
+    background-color: white;
+    height: 100vh;
+  }
+  .hold {
+    width: 80%;
+    margin: 60px auto;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+  }
+  button {
+    background-color: #f5a623;
+    border: none;
+    color: white;
+    padding: 13px 16px 13px 16px;
+    width: 100%;
+    height: 36.6px;
+    font-size: 12.2px;
+    line-height: 14.64px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4.06px;
+    letter-spacing: 0.51px;
+    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+  }
+  .guarantee {
+    display: flex;
+  }
+  .money-1 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .money-2 {
+    font-size: 0.8rem;
+  }
 }
 </style>

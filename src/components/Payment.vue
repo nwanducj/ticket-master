@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="ml-4 list">
+    <div class="list">
       <div class="mt-2">
         <button class="closeBtn" @click="close">
           <svg
@@ -34,13 +34,15 @@
       </div>
       <div class="">
         <div
-          class="flex tm"
+          class="event tm"
           v-for="(varieties, i) in cart.varieties"
           :key="varieties"
         >
-          <div style="width: 30%">{{ varieties.name }}</div>
-          <div style="width: 30%">{{ getFormattedPrice(varieties.price) }}</div>
-          <div style="display: flex; align-items: center">
+          <div class="event__type">{{ varieties.name }}</div>
+          <div class="event__price">
+            {{ getFormattedPrice(varieties.price) }}
+          </div>
+          <div class="quantity">
             <button class="add" @click="decreaseQyt(i)">
               <svg
                 width="24"
@@ -165,18 +167,7 @@
           />
         </svg>
       </div>
-      <div
-        style="
-          width: 277px;
-          height: 28px;
-          left: 133px;
-          font-family: Flutterwave;
-          font-size: 14px;
-          line-height: 28px;
-          letter-spacing: 0.5px;
-          color: #828282;
-        "
-      >
+      <div class="ticket__sales">
         Ticket sales ends on {{ getDate(cart.tickets_sale_end_date) }}
       </div>
     </div>
@@ -212,6 +203,17 @@ export default {
       userDto: "getUser",
       cart: "getCartList",
     }),
+    totalPayment() {
+      let total = 0;
+      this.cart.varieties.forEach((item) => {
+        if (item.qyt > 0) {
+          total += item.price * item.qyt * 1;
+          console.log(total);
+        }
+      });
+
+      return total + this.cart.vat;
+    },
   },
   data() {
     return {
@@ -223,7 +225,6 @@ export default {
       props: [],
       cartList: [],
       continueClicked: false,
-      totalPayment: 11000,
     };
   },
   components: {
@@ -300,9 +301,15 @@ export default {
   display: flex;
   height: 100%;
 }
-.flex {
+.event {
   display: flex;
   justify-content: space-between;
+  &__type {
+    width: 30%;
+  }
+  &__price {
+    width: 30%;
+  }
 }
 .list {
   width: 80%;
@@ -324,9 +331,10 @@ button {
   box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
 }
 .closeBtn {
+  margin-top: -10px;
 }
 .title__holder {
-  margin: 32px 0 64px 0;
+  margin: 20px 0 25px 0;
 }
 .title {
   font-size: 1.7rem;
@@ -348,6 +356,20 @@ button {
   margin: 0;
   padding: 0;
 }
+.ticket__sales {
+  width: 277px;
+  height: 28px;
+  left: 133px;
+  font-family: Flutterwave;
+  font-size: 14px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+  color: #828282;
+}
+.quantity {
+  display: flex;
+  align-items: center;
+}
 @media screen and (min-width: 480px) {
   .summary {
     height: 100vh;
@@ -366,9 +388,15 @@ button {
     display: flex;
     height: 100vh;
   }
-  .flex {
+  .event {
     display: flex;
     justify-content: space-between;
+    &__type {
+      width: 30%;
+    }
+    &__price {
+      width: 30%;
+    }
   }
   .list {
     width: 500px;
@@ -411,6 +439,20 @@ button {
     box-shadow: 0px 0 0px 0px #00000080;
     margin: 0;
     padding: 0;
+  }
+  .ticket__sales {
+    width: 277px;
+    height: 28px;
+    left: 133px;
+    font-family: Flutterwave;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    color: #828282;
+  }
+  .quantity {
+    display: flex;
+    align-items: center;
   }
 }
 </style>

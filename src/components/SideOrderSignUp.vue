@@ -47,10 +47,10 @@
       </form>
       <div class="flex money">
         <div class="total">TOTAL PAYMENT</div>
-        <div class="price">N{{ getFormattedPrice(totalPayment) }}</div>
+        <div class="price">{{ getFormattedPrice(totalPayment) }}</div>
       </div>
       <button @click="atFlutterwave">
-        N{{ getFormattedPrice(totalPayment) }}
+        {{ getFormattedPrice(totalPayment) }}
       </button>
       <div class="flexx">
         <div class="verified">
@@ -122,7 +122,7 @@ export default {
         amount: this.totalPayment,
         currency: this.currency,
         phone_number: this.person.phoneNumber,
-        payment_options: "CARD",
+        payment_options: "card",
         customer: {
           name: `${this.person.fullname}`,
           email: this.person.email,

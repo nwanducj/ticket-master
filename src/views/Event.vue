@@ -383,7 +383,6 @@ export default {
     },
     paymentCompleted: function () {
       this.payment = false;
-      this.overlay = true;
       this.completeSuccess = true;
     },
     closeRegister: function () {
