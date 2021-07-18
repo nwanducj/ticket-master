@@ -1,15 +1,7 @@
 <template>
-  <div class="holder">
+  <div class="holder" id="payment">
     <div class="hold">
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          font-size: 0.9rem;
-          font-weight: 700;
-        "
-        @click="goPrev"
-      >
+      <div class="holder__main" @click="goPrev">
         <button class="back">
           <svg
             width="20"
@@ -37,13 +29,34 @@
           Go back
         </button>
       </div>
-      <form>
-        <label for="full name" class="label">Full name</label>
-        <input v-model="person.fullname" type="text" id="full name" />
-        <label for="email address" class="label">Email address</label>
-        <input v-model="person.email" type="text" id="email address" />
-        <label for="phone number" class="label">Phone number</label>
-        <input v-model="person.phoneNumber" type="text" id="phone number" />
+      <form role="form" aria-label="User Information">
+        <label aria-label="Fullname" for="full name" class="label"
+          >Full name</label
+        >
+        <input
+          aria-required="true"
+          v-model="person.fullname"
+          type="text"
+          id="full name"
+        />
+        <label aria-label="Email" for="email address" class="label"
+          >Email address</label
+        >
+        <input
+          aria-required="true"
+          v-model="person.email"
+          type="text"
+          id="email address"
+        />
+        <label aria-label="Phone Number" for="phone number" class="label"
+          >Phone number</label
+        >
+        <input
+          aria-required="true"
+          v-model="person.phoneNumber"
+          type="text"
+          id="phone number"
+        />
       </form>
       <div class="flex money">
         <div class="total">TOTAL PAYMENT</div>
@@ -127,7 +140,6 @@ export default {
           name: `${this.person.fullname}`,
           email: this.person.email,
         },
-
         callback: (response) => this.callbackFlutter(response),
         customizations: {
           title: "Nexbuy District | Wallet Funding",
@@ -159,6 +171,12 @@ export default {
 .holder {
   background-color: white;
   height: 100vh;
+  &__main {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
 }
 .hold {
   width: 80%;

@@ -21,15 +21,16 @@ export default {
       return this.$route.meta.layout || DefaultLayout;
     },
   },
+  created() {
+    this.$store.dispatch("getUser");
+  },
 };
 </script>
 <style lang="scss">
 #app {
   position: relative;
   width: 100vw;
-  // height: 100vh;
   margin: 0;
-  // background-color: #f2f2f2;
 }
 .header {
   width: 81.5%;

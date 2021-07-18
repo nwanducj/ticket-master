@@ -205,11 +205,11 @@
         </g>
       </svg>
     </div>
-    <DesktopHeader class="header" />
-    <main>
+    <DesktopHeader class="header" role="contentinfo" />
+    <main role="main">
       <slot />
     </main>
-    <Footer class="footer" />
+    <Footer class="footer" role="contentinfo" />
   </div>
 </template>
 

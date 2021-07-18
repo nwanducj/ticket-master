@@ -2,8 +2,8 @@
   <footer class="flex">
     <div class="terms">Copyright 2019. Flutterwave inc</div>
     <div class="terms">
-      <div>Terms and condition</div>
-      <div class="policy">Policy Privacy</div>
+      <a>Terms and condition</a>
+      <a class="policy">Policy Privacy</a>
     </div>
   </footer>
 </template>

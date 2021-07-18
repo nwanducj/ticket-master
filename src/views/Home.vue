@@ -1,36 +1,38 @@
 <template>
   <div class="holder" v-if="!loading">
-    <div class="tag">The best events happening now.</div>
-    <div style="width: 80%; margin: 0 30px 0 10%">
-      <div class="events">
+    <h2 class="tag">The best events happening now.</h2>
+    <div class="hold">
+      <div class="events" role="grid">
         <div
           v-for="(event, i) in events"
           :key="i"
           @click="$router.push(`/event/${event.id}`)"
+          role="button"
         >
-          <div class="event">
+          <div
+            class="event"
+            role="figure"
+            aria-labelledby="caption"
+            :aria-label="event.description"
+          >
             <img
               v-if="event.image !== null"
               :src="event.image"
-              alt="event image"
+              :alt="event.description"
             />
             <img
               v-if="event.image == null"
               src="@/assets/images/Event-image.png"
-              alt="event image"
+              :alt="event.description"
             />
 
-            <div style="width: 300px" class="event__date">
+            <div class="event__date">
               {{ getDate(event.start_time) }}
             </div>
-            <div style="width: 300px" class="event__name">
+            <div class="event__name" id="caption">
               {{ event.name }}
             </div>
-            <div
-              style="width: 300px"
-              class="event__price"
-              v-if="!event.is_free"
-            >
+            <div class="event__price" v-if="!event.is_free">
               N5000 - N200,000
             </div>
             <div class="event__price" v-if="event.is_free">FREE</div>
@@ -90,6 +92,7 @@ export default {
 
   .event {
     &__date {
+      width: 300px;
       font-size: 10px;
       line-height: 14px;
       letter-spacing: 0px;
@@ -97,6 +100,7 @@ export default {
       margin: 5px 0 0px 0;
     }
     &__name {
+      width: 300px;
       font-size: 18px;
       font-style: normal;
       font-weight: 700;
@@ -104,7 +108,9 @@ export default {
       letter-spacing: 0px;
       text-align: left;
     }
+
     &__price {
+      width: 300px;
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
@@ -119,6 +125,10 @@ export default {
       border-radius: 5px;
     }
   }
+}
+.hold {
+  width: 80%;
+  margin: 0 30px 0 10%;
 }
 .tag {
   width: 80%;
@@ -138,6 +148,7 @@ export default {
 
     .event {
       &__date {
+        width: 300px;
         font-size: 10px;
         line-height: 14px;
         letter-spacing: 0px;
@@ -145,6 +156,7 @@ export default {
         margin: 5px 0 0px 0;
       }
       &__name {
+        width: 300px;
         font-size: 18px;
         font-style: normal;
         font-weight: 700;
@@ -153,6 +165,7 @@ export default {
         text-align: left;
       }
       &__price {
+        width: 300px;
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
@@ -181,6 +194,10 @@ export default {
   }
   .holder {
     width: 100vw;
+  }
+  .hold {
+    width: 80%;
+    margin: 0 30px 0 10%;
   }
 }
 </style>

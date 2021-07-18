@@ -22,8 +22,14 @@ export default createStore({
     }
   },
   actions: {
-    getUser() { },
+    getUser(context) {
+      let user = JSON.parse(localStorage.getItem("ticket-master-user"));
+      if (user) {
+        context.commit("SET_USER", user);
+      }
+    },
     setUser(context, user) {
+      localStorage.setItem("ticket-master-user", JSON.stringify(user));
       context.commit("SET_USER", user);
     },
     //give comment on it

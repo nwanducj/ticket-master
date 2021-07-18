@@ -1,12 +1,14 @@
 <template>
-  <header class="head">
-    <div class="head__logo" @click="$router.push('/')">
+  <header class="head" role="banner">
+    <a class="head__logo" @click="$router.push('/')">
       <svg
         width="173"
         height="34"
         viewBox="0 0 173 34"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Flutterwave's Logo"
       >
         <path
           fill-rule="evenodd"
@@ -21,11 +23,11 @@
           fill="#F5A623"
         />
       </svg>
-    </div>
-    <div class="head__button">
+    </a>
+    <nav class="head__button">
       <button class="text__button">I didn’t get my tickets</button>
       <div><button>CREATE YOUR OWN EVENT</button></div>
-    </div>
+    </nav>
   </header>
 </template>
 
@@ -64,7 +66,6 @@ export default {
   .head {
     display: flex;
     justify-content: space-between;
-
     button {
       background-color: #f5a623;
       border: none;

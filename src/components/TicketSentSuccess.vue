@@ -1,7 +1,9 @@
 <template>
-  <div class="main">
+  <div class="main" role="dialog" aria-labelledby="dialogTitle">
     <div class="express">
-      <div>Enter your email and we’ll send your tickets right away!</div>
+      <div id="dialogTitle">
+        Enter your email and we’ll send your tickets right away!
+      </div>
     </div>
     <div class="card">
       <svg

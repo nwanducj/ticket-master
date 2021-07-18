@@ -1,39 +1,32 @@
 <template>
   <div style="" class="hold">
     <div class="card">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-        "
-      >
+      <div class="card__head">
         <div>REGISTER FOR FREE</div>
-
-        <svg
-          @click="close"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M18 6L6 18"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M6 6L18 18"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <button class="closeBtn" @click="close">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
       <svg
         width="100%"
@@ -45,15 +38,39 @@
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
 
-      <div style="margin-top: 20px">
+      <div class="register__form">
         <div class="desc">
-          <form>
-            <label for="full name" class="label">Full name</label>
-            <input v-model="fullname" type="text" id="full name" />
-            <label for="email address" class="label">Email address</label>
-            <input v-model="email" type="text" id="email address" />
-            <label for="phone number" class="label">Phone number</label>
-            <input v-model="phoneNumber" type="text" id="phone number" />
+          <form role="form" aria-label="User Information">
+            <label for="full name" aria-label="Fullname" class="label"
+              >Full name</label
+            >
+            <input
+              aria-required="true"
+              required
+              v-model="fullname"
+              type="text"
+              id="full name"
+            />
+            <label for="email address" aria-label="Email Address" class="label"
+              >Email address</label
+            >
+            <input
+              aria-required="true"
+              required
+              v-model="email"
+              type="text"
+              id="email address"
+            />
+            <label for="phone number" aria-label="Phone Number" class="label"
+              >Phone number</label
+            >
+            <input
+              aria-required="true"
+              required
+              v-model="phoneNumber"
+              type="text"
+              id="phone number"
+            />
           </form>
         </div>
         <button type="submit" @click="setUser">REGISTER</button>
@@ -145,6 +162,12 @@ input {
   box-shadow: 1px 1px 1px #aaaaaa;
   text-align: start;
   box-shadow: 0px 0px 0px 0px #00000040;
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+  }
 }
 .desc {
   margin: 15px 0;
@@ -174,7 +197,29 @@ button {
   letter-spacing: 0.51px;
   box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
 }
+.closeBtn {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 25px;
+  height: 36.6px;
+  font-size: 12.2px;
+  line-height: 14.64px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4.06px;
+  letter-spacing: 0.51px;
+  box-shadow: 0px 0 0 0px #00000080;
+}
+.register__form {
+  margin-top: 20px;
+}
 @media screen and (min-width: 768px) {
+  .register__form {
+    margin-top: 20px;
+  }
   .hold {
     z-index: 50;
     position: fixed;
@@ -224,6 +269,12 @@ button {
     box-shadow: 1px 1px 1px #aaaaaa;
     text-align: start;
     box-shadow: 0px 4px 4px 0px #00000040;
+    &__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
   }
   .desc {
     margin: 15px 0;

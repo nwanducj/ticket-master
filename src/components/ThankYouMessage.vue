@@ -1,40 +1,33 @@
 <template>
-  <div
-    style="
-      z-index: 50;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    "
-  >
+  <div class="holder" role="dialog" aria-labelledby="dialogTitle">
     <div class="card">
       <div style="float: right">
-        <svg
-          @click="$emit('closeThankYouMessage')"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M18 6L6 18"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M6 6L18 18"
-            stroke="#333333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <button class="closeBtn" @click="$emit('closeThankYouMessage')">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
-      <div style="margin-top: 50px">
+      <div class="card__main">
         <svg
           width="137"
           height="137"
@@ -57,7 +50,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <div class="desc">
+        <div class="desc" id="dialogTitle">
           Your tickets have been confirmed and sent to your email address at
           <a href="#">ted@flutterwave.com</a>
         </div>
@@ -78,6 +71,13 @@ export default {
 
 
 <style scoped lang="scss">
+.holder {
+  z-index: 50;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .overlay {
   height: 100%;
   width: 100%;
@@ -120,6 +120,25 @@ input {
   box-shadow: 1px 1px 1px #aaaaaa;
   text-align: center;
   box-shadow: 0px 4px 4px 0px #00000040;
+  &__main {
+    margin-top: 50px;
+  }
+}
+.closeBtn {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 25px;
+  height: 36.6px;
+  font-size: 12.2px;
+  line-height: 14.64px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4.06px;
+  letter-spacing: 0.51px;
+  box-shadow: 0px 0 0 0px #00000080;
 }
 .desc {
   margin: 15px 0;

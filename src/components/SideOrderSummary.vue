@@ -22,15 +22,6 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" /></svg
-      ><svg
-        class=""
-        width="100%"
-        height="1"
-        viewBox="0 0 368 1"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
       <div class="flex">
@@ -46,8 +37,8 @@
         <div>{{ getFormattedPrice(cart.vat + getSubTotal) }}</div>
       </div>
       <button @click="goNext">CONTINUE</button>
-      <div class="guarantee mt-1" style="margin: 10px 0">
-        <div style="margin: 0 10px 0 0">
+      <div class="guarantee">
+        <div class="guarantee__logo">
           <svg
             width="26"
             height="26"
@@ -63,7 +54,7 @@
             />
           </svg>
         </div>
-        <div class="ml-1">
+        <div class="">
           <div class="money-1">100% customer satisfaction protection</div>
           <div class="money-2">Money back guarantee</div>
         </div>
@@ -191,6 +182,10 @@ button {
   }
   .guarantee {
     display: flex;
+    margin: 10px 0;
+    &__logo {
+      margin: 0 10px 0 0;
+    }
   }
   .money-1 {
     font-size: 1rem;

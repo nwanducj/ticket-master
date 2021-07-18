@@ -1,5 +1,9 @@
 <template>
-  <div class="main">
+  <div
+    class="main"
+    role="dialog"
+    aria-label="Proceed to check items and make payment"
+  >
     <div class="list">
       <div class="mt-2">
         <button class="closeBtn" @click="close">
@@ -50,6 +54,8 @@
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                role="region"
+                aria-label="decrease quantity"
               >
                 <g filter="url(#filter0_d)">
                   <circle cx="13" cy="11" r="10" fill="white" />
@@ -103,6 +109,8 @@
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                role="region"
+                aria-label="decrease quantity"
               >
                 <g filter="url(#filter0_d)">
                   <circle cx="13" cy="11" r="10" fill="white" />
