@@ -188,7 +188,7 @@
       v-if="!continueClicked"
     />
     <SideOrderSignUp
-      class="summary"
+      class="signup"
       @goBack="goBack"
       v-if="continueClicked"
       :totalPayment="totalPayment"
@@ -284,10 +284,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .summary {
-  height: 100vh;
-  width: 72vw;
+  height: 50vh;
+  width: 100vw;
   position: fixed;
-  right: 0;
+  bottom: 0;
+}
+.signup {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
 }
 .main {
   background-color: #f2f2f2;
@@ -299,8 +305,8 @@ export default {
   justify-content: space-between;
 }
 .list {
-  width: 500px;
-  margin: 40px 70px;
+  width: 80%;
+  margin: 40px auto;
 }
 .qyt {
   // padding: 0 0 10px 0;
@@ -344,6 +350,12 @@ button {
 }
 @media screen and (min-width: 480px) {
   .summary {
+    height: 100vh;
+    width: 32vw;
+    position: absolute;
+    right: 0;
+  }
+  .signup {
     height: 100vh;
     width: 32vw;
     position: absolute;
