@@ -1,13 +1,5 @@
 <template>
-  <div
-    style="
-      z-index: 50;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    "
-  >
+  <div style="" class="hold">
     <div class="card">
       <div
         style="
@@ -103,11 +95,19 @@ export default {
 
 
 <style scoped lang="scss">
+.hold {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  background-color: red;
+  z-index: 3;
+  top: 0;
+}
 .overlay {
   height: 100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.8;
+  width: 100vh;
+  background-color: white;
   z-index: 2;
   position: fixed;
   top: 0;
@@ -138,13 +138,13 @@ input {
   border: 1px solid darken(#f2f2f2, 10);
 }
 .card {
-  width: 320px;
+  width: 85vw;
   background-color: white;
   padding: 30px 30px 70px 30px;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 1px 1px 1px #aaaaaa;
   text-align: start;
-  box-shadow: 0px 4px 4px 0px #00000040;
+  box-shadow: 0px 0px 0px 0px #00000040;
 }
 .desc {
   margin: 15px 0;
@@ -173,5 +173,85 @@ button {
   border-radius: 4.06px;
   letter-spacing: 0.51px;
   box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+}
+@media screen and (min-width: 768px) {
+  .hold {
+    z-index: 50;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .overlay {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+  }
+  .express > div {
+    display: inline;
+    padding: 0 30%;
+    width: 40%;
+    text-align: center;
+  }
+  .express {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  input {
+    outline: none;
+    border: none;
+    background-color: lighten(#f2f2f2, 3);
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 2px 0px 10px 0px;
+    border: 1px solid darken(#f2f2f2, 10);
+  }
+  .card {
+    width: 320px;
+    background-color: white;
+    padding: 30px 30px 70px 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #aaaaaa;
+    text-align: start;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+  .desc {
+    margin: 15px 0;
+  }
+  .label {
+    font-size: 0.9rem;
+    color: #333333;
+  }
+  a {
+    color: darken(lightblue, 30);
+    text-decoration: none;
+  }
+  button {
+    background-color: #faa800;
+    border: none;
+    color: white;
+    padding: 13px 16px 13px 16px;
+    width: 100%;
+    height: 36.6px;
+    font-size: 12.2px;
+    line-height: 14.64px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4.06px;
+    letter-spacing: 0.51px;
+    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+  }
 }
 </style>

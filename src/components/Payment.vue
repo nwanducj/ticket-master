@@ -2,7 +2,7 @@
   <div class="main">
     <div class="ml-4 list">
       <div class="mt-2">
-        <button @click="close">
+        <button class="closeBtn" @click="close">
           <svg
             width="18"
             height="18"
@@ -285,14 +285,14 @@ export default {
 <style lang="scss" scoped>
 .summary {
   height: 100vh;
-  width: 32vw;
-  position: absolute;
+  width: 72vw;
+  position: fixed;
   right: 0;
 }
 .main {
   background-color: #f2f2f2;
   display: flex;
-  height: 100vh;
+  height: 100%;
 }
 .flex {
   display: flex;
@@ -316,6 +316,8 @@ button {
   font-size: 0.8rem;
   color: darken(grey, 80);
   box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+}
+.closeBtn {
 }
 .title__holder {
   margin: 32px 0 64px 0;
@@ -341,5 +343,62 @@ button {
   padding: 0;
 }
 @media screen and (min-width: 480px) {
+  .summary {
+    height: 100vh;
+    width: 32vw;
+    position: absolute;
+    right: 0;
+  }
+  .main {
+    background-color: #f2f2f2;
+    display: flex;
+    height: 100vh;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  .list {
+    width: 500px;
+    margin: 40px 70px;
+  }
+  .qyt {
+    // padding: 0 0 10px 0;
+    margin: 0 10px;
+  }
+
+  button {
+    border: none;
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    color: darken(grey, 80);
+    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+  }
+  .title__holder {
+    margin: 32px 0 64px 0;
+  }
+  .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+  .date {
+    color: grey;
+    margin-top: 5px;
+  }
+  .tm {
+    margin: 10px 0 0 0;
+  }
+  .add {
+    background-color: #f2f2f2;
+    border: none;
+    display: flex;
+    color: darken(grey, 80);
+    box-shadow: 0px 0 0px 0px #00000080;
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>

@@ -30,7 +30,6 @@
       </div>
       <svg
         class="line"
-        style="margin: 30px 0"
         width="100%"
         height="1"
         viewBox="0 0 941 1"
@@ -47,10 +46,7 @@
           <div class="event__address">
             Eko Atlantic Beach, Off Ahmadu Bello way, Victoria Island, Lagos.
           </div>
-          <div
-            class="event__direction"
-            style="display: flex; align-items: center; justify-items: center"
-          >
+          <div class="event__direction">
             <svg
               width="18"
               height="18"
@@ -419,6 +415,10 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.line {
+  margin: 30px 0;
+}
+
 .event {
   padding: 25px 0;
 
@@ -432,7 +432,7 @@ export default {
   }
 
   &__name {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin: 10px 0;
   }
   &__price {
@@ -501,6 +501,11 @@ export default {
   }
   &__free {
     color: green;
+  }
+  &__event__direction {
+    display: flex;
+    align-items: center;
+    justify-items: center;
   }
 }
 img {
@@ -625,6 +630,11 @@ a {
     }
     &__sec {
       width: 100%;
+    }
+    &__event__direction {
+      display: flex;
+      align-items: center;
+      justify-items: center;
     }
   }
   img {
