@@ -24,6 +24,7 @@
               v-if="event.image == null"
               src="@/assets/images/Event-image.png"
               :alt="event.description"
+              class="first__image"
             />
 
             <div class="event__date">
@@ -33,7 +34,7 @@
               {{ event.name }}
             </div>
             <div class="event__price" v-if="!event.is_free">
-              N5000 - N200,000
+              N5,000 - N200,000
             </div>
             <div class="event__price" v-if="event.is_free">FREE</div>
           </div>
@@ -128,7 +129,8 @@ export default {
 }
 .hold {
   width: 80%;
-  margin: 0 30px 0 10%;
+  // margin: 0 30px 0 10%;
+  margin: 0 auto;
 }
 .tag {
   width: 80%;
@@ -139,6 +141,11 @@ export default {
   line-height: 40px;
   letter-spacing: 0px;
   text-align: left;
+}
+.first__image {
+  width: 300px;
+  height: 230px;
+  border-radius: 5px;
 }
 @media screen and (min-width: 768px) {
   .events {
@@ -177,6 +184,11 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        border-radius: 5px;
+      }
+      .first__image {
+        width: 100%;
+        height: 240px;
         border-radius: 5px;
       }
     }

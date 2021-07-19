@@ -205,11 +205,50 @@
         </g>
       </svg>
     </div>
-    <DesktopHeader class="header" role="contentinfo" />
+    <DesktopHeader class="header" role="contentinfo" @toggleMenu="toggleMenu" />
     <main role="main">
       <slot />
     </main>
     <Footer class="footer" role="contentinfo" />
+    <div class="fullnav" v-if="clickedMenu">
+      <button class="closeBtn" @click="toggleMenu">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.5 4.5L4.5 13.5"
+            stroke="#333333"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M4.5 4.5L13.5 13.5"
+            stroke="#333333"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <div
+        style="
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        "
+      >
+        <button class="text__button" @click="$router.push('/ticket-request')">
+          I DID NOT GET MY TICKET
+        </button>
+        <button>CREATE AN EVENT</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -218,11 +257,16 @@ import DesktopHeader from "@/components/DesktopHeader.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   data() {
-    return { show: true };
+    return { show: true, clickedMenu: false };
   },
   components: {
     DesktopHeader,
     Footer,
+  },
+  methods: {
+    toggleMenu() {
+      this.clickedMenu = !this.clickedMenu;
+    },
   },
   created() {
     console.log(this.$route.path);
@@ -230,8 +274,111 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.fullnav {
+  position: fixed;
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+}
 .header {
   width: 81.5%;
   margin: 0 auto;
+}
+button {
+  background-color: #f5a623;
+  border: none;
+  color: white;
+  // padding: 13px 16px 13px 16px;
+  width: 206px;
+  height: 36.6px;
+  font-size: 0.8rem;
+  line-height: 14.64px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 24px;
+  display: block;
+  border-radius: 4.06px;
+  letter-spacing: 0.51px;
+  box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+}
+.text__button {
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 16.8px;
+  letter-spacing: 1px;
+  margin: 20px 0 0 0;
+  padding: 0;
+  border: #f5a623 solid 1px;
+  background-color: white;
+  color: #f5a623;
+  box-shadow: 0 0 0 0px #00000080;
+  width: 206px;
+  display: block;
+  text-align: center;
+}
+.closeBtn {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  letter-spacing: 1px;
+  margin-top: 20px 0 10px 0;
+  padding: 0;
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 0 0px #00000080;
+  width: 70px;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+@media screen and (min-width: 768px) {
+  .fullnav {
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  .header {
+    width: 81.5%;
+    margin: 0 auto;
+  }
+  button {
+    background-color: #f5a623;
+    border: none;
+    color: white;
+    // padding: 13px 16px 13px 16px;
+    width: 206px;
+    height: 36.6px;
+    font-size: 12px;
+    line-height: 14.64px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-top: 24px;
+    display: block;
+    border-radius: 4.06px;
+    letter-spacing: 0.51px;
+    box-shadow: 0px 1.0167313814163208px 1.0167313814163208px 0px #00000080;
+  }
+  .text__button {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: 1px;
+    margin: 20px 0 20px 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 0 0px #00000080;
+    width: 206px;
+    display: block;
+    text-align: center;
+  }
 }
 </style>

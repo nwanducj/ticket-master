@@ -47,7 +47,9 @@
             Your tickets have been confirmed and sent to your email address at
             <a href="#">ted@flutterwave.com</a>
           </div>
-          <button type="submit">BUY MORE TICKETs</button>
+          <button type="submit" @click="$router.push('/')">
+            BUY MORE TICKETS
+          </button>
         </div>
       </div>
     </div>
@@ -85,19 +87,18 @@ export default {
   }
 }
 .main {
-  padding: 0px 0;
+  margin: 0px auto;
 }
 .express > div {
   display: inline;
-  margin-top: 40px;
-  padding: 0 10%;
+  padding: 0 15%;
   width: 100vw;
   text-align: center;
 }
 .express {
   display: flex;
   justify-content: center;
-  margin: 20px 0 0 0;
+  margin: 0px 0 0 0;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -166,21 +167,26 @@ a {
       height: 78vh;
       width: 100vw;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-items: center;
     }
   }
   .main {
-    padding: 40px 0;
+    padding: 10px 0;
+    margin: 0 auto;
+    width: 50%;
   }
   .express > div {
     display: inline;
-    padding: 0 30%;
-    width: 25%;
+    padding: 0 25%;
+    width: 100%;
     text-align: center;
   }
   .express {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 1.2rem;
     font-weight: bold;
   }
@@ -213,12 +219,14 @@ a {
     border: 1px solid darken(#f2f2f2, 10);
   }
   .card {
-    width: 25%;
+    width: 70%;
     margin: 0px auto;
     background-color: white;
     height: 100%;
-    padding: 50px 30px;
+    padding: 70px 30px;
     border-radius: 10px;
+    box-shadow: 1px 1px 1px #aaaaaa;
+    text-align: start;
     box-shadow: 0px 4px 4px 0px #00000040;
   }
   .label {
@@ -226,7 +234,7 @@ a {
     color: #333333;
   }
   .card-success {
-    width: 25%;
+    width: 70%;
     margin: 0px auto;
     background-color: white;
     height: 100%;

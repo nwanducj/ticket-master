@@ -24,9 +24,17 @@
         />
       </svg>
     </a>
-    <nav class="head__button">
-      <button class="text__button">I didn’t get my tickets</button>
-      <div><button>CREATE YOUR OWN EVENT</button></div>
+    <nav class="">
+      <button class="menuBtn" @click="$emit('toggleMenu')">
+        <i class="fas fa-bars menu"></i>
+      </button>
+      <button
+        class="text__button head__button"
+        @click="$router.push('/ticket-request')"
+      >
+        I didn’t get my tickets
+      </button>
+      <button class="button__create head__button">CREATE YOUR OWN EVENT</button>
     </nav>
   </header>
 </template>
@@ -45,10 +53,6 @@ export default {
 .head {
   display: flex;
   justify-content: space-between;
-
-  button {
-    display: none;
-  }
   .text__button {
     display: none;
   }
@@ -59,10 +63,30 @@ export default {
     height: 34px;
   }
   &__button {
+    display: flex;
+  }
+  .button__create {
     display: none;
   }
 }
+.menuBtn {
+  font-size: 20px;
+  border: none;
+  width: 20px;
+  margin: 20px 0;
+}
+.menu {
+  font-size: 1.3rem;
+}
+
 @media screen and (min-width: 768px) {
+  .menu {
+    font-size: 1.3rem;
+    display: none;
+  }
+  .menuBtn {
+    display: none;
+  }
   .head {
     display: flex;
     justify-content: space-between;
@@ -106,6 +130,15 @@ export default {
     &__button {
       display: flex;
     }
+    .button__create {
+      display: block;
+    }
+    .menuBtn {
+      display: none;
+    }
+  }
+  nav {
+    display: flex;
   }
 }
 </style>
