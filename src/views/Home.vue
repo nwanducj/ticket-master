@@ -42,11 +42,14 @@
       </div>
     </div>
   </div>
+  <LoadingScreen v-else style="position: fixed; height: 100vh; bottom: 0" />
 </template>
 
 <script>
+import LoadingScreen from "../components/LoadingScreen.vue";
 // @ is an alias to /src
 const axios = require("axios");
+// import { mapGetters } from "vuex";
 // const moment = require("moment");
 export default {
   name: "Home",
@@ -56,7 +59,7 @@ export default {
       events: [],
     };
   },
-  components: {},
+  components: { LoadingScreen },
   methods: {
     getDate(date) {
       let new_date = new Date(date);
@@ -81,6 +84,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
+        this.loading = false;
       });
   },
 };

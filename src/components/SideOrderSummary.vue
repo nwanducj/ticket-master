@@ -1,7 +1,16 @@
 <template>
   <div class="holder">
     <div class="hold">
-      <div>ORDER SUMMARY</div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <span>ORDER SUMMARY</span>
+        <i @click="$emit('closeSummary')" class="fa fa-times"></i>
+      </div>
       <svg
         width="100%"
         height="1"
@@ -108,6 +117,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.fa-times {
+  text-align: end;
+  display: inline-block;
+}
 .holder {
   background-color: white;
   border-radius: 20px 20px 0 0;
@@ -141,6 +154,10 @@ button {
 }
 .guarantee {
   display: flex;
+  margin-top: 10px;
+  &__logo {
+    margin-right: 10px;
+  }
 }
 .money-1 {
   font-size: 1rem;
@@ -149,7 +166,11 @@ button {
 .money-2 {
   font-size: 0.8rem;
 }
+
 @media screen and (min-width: 768px) {
+  .fa-times {
+    display: none;
+  }
   .holder {
     background-color: white;
     height: 100vh;

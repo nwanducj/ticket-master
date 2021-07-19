@@ -178,13 +178,19 @@
       <div class="ticket__sales">
         Ticket sales ends on {{ getDate(cart.tickets_sale_end_date) }}
       </div>
+      <div role="button" class="ticket__continue" @click="openSummary">
+        <span>Continue</span
+        ><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+      </div>
     </div>
     <SideOrderSummary
-      class="summary"
+      :class="summaryOpen ? 'summaryy' : 'summary'"
       @clickContinue="clickContinue"
+      @closeSummary="closeSummary"
+      @openSummary="openSummary"
       :totalPayment="totalPayment"
       :cart="cart"
-      v-if="!continueClicked"
+      v-if="!continueClicked || summaryOpen"
     />
     <SideOrderSignUp
       class="signup"
@@ -225,6 +231,7 @@ export default {
   },
   data() {
     return {
+      summaryOpen: false,
       user: {
         fullname: "",
         email: "",
@@ -240,6 +247,12 @@ export default {
     SideOrderSignUp,
   },
   methods: {
+    closeSummary() {
+      this.summaryOpen = false;
+    },
+    openSummary() {
+      this.summaryOpen = true;
+    },
     getFormattedPrice: function (price) {
       console.log(price);
       return formatCurrency(price);
@@ -292,11 +305,23 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.fa {
+  color: #f5a623;
+  margin-left: 5px;
+}
 .summary {
-  height: 50vh;
+  height: 100vh;
   width: 100vw;
   position: fixed;
   bottom: 0;
+  display: none;
+}
+.summaryy {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  display: block;
 }
 .signup {
   height: 100vh;
@@ -378,12 +403,17 @@ button {
   display: flex;
   align-items: center;
 }
-@media screen and (min-width: 480px) {
+.ticket__continue {
+  color: #f5a623;
+  text-align: end;
+}
+@media screen and (min-width: 768px) {
   .summary {
     height: 100vh;
     width: 32vw;
     position: absolute;
     right: 0;
+    display: block;
   }
   .signup {
     height: 100vh;
@@ -461,6 +491,11 @@ button {
   .quantity {
     display: flex;
     align-items: center;
+  }
+  .ticket__continue {
+    color: #f5a623;
+    text-align: end;
+    display: none;
   }
 }
 </style>

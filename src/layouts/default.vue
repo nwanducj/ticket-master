@@ -243,18 +243,22 @@
           transform: translate(-50%, -50%);
         "
       >
-        <button class="text__button" @click="$router.push('/ticket-request')">
+        <button class="text__button" @click="gotoLink">
           I DID NOT GET MY TICKET
         </button>
         <button>CREATE AN EVENT</button>
       </div>
     </div>
+    <!-- <LoadingScreen
+      style="position: fixed; height: 100vh; overflow-y: hidden; bottom: 0"
+    /> -->
   </div>
 </template>
 
 <script>
 import DesktopHeader from "@/components/DesktopHeader.vue";
 import Footer from "@/components/Footer.vue";
+// import { mapGetters } from "vuex";
 export default {
   data() {
     return { show: true, clickedMenu: false };
@@ -266,6 +270,12 @@ export default {
   methods: {
     toggleMenu() {
       this.clickedMenu = !this.clickedMenu;
+    },
+    gotoLink() {
+      this.$router.push("/ticket-request");
+      this.clickedMenu = false;
+
+      console.log(this.clickedMenu);
     },
   },
   created() {

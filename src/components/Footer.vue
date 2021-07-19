@@ -39,11 +39,13 @@ export default {
   .flex {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     padding-bottom: 30px;
     padding-top: 30px;
 
     .terms {
       display: flex;
+      margin: 0px 0 0 0;
     }
     .policy {
       margin: 0 0 0 48px;

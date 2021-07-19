@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div>
     <div class="event" v-if="event" role="region" aria-label="Event">
       <div class="event__detail">
         <div class="event__image" role="img" :aria-label="event.description">
@@ -120,13 +120,17 @@
         @paymentCompleted="paymentCompleted"
       />
     </div>
+    <LoadingScreen
+      v-if="loading"
+      style="position: fixed; height: 100vh; top: 0; z-index: 30"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import { formatCurrency } from "../static/utils.js";
 import ThankYouMessage from "../components/ThankYouMessage.vue";
+import LoadingScreen from "../components/LoadingScreen.vue";
 import Register from "../components/Register.vue";
 import Payment from "../components/Payment.vue";
 import { mapGetters } from "vuex";
@@ -142,7 +146,7 @@ export default {
       completeSucesss: false,
     };
   },
-  components: { ThankYouMessage, Register, Payment },
+  components: { ThankYouMessage, Register, Payment, LoadingScreen },
   computed: {
     ...mapGetters({
       user: "getUser",
@@ -194,6 +198,7 @@ export default {
 
   created() {
     let id = this.$route.params.event_id;
+    this.loading = true
     try {
       axios
         .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
@@ -204,9 +209,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.loading = false;
         });
     } catch (error) {
       console.log(error);
+      this.loading = false;
     }
   },
 };
