@@ -2,22 +2,14 @@
   <div class="holder">
     <div class="holder__main">
       <div class="main" role="region" aria-labelledby="caption">
-        <div class="express" v-if="!success">
+        <div class="express" v-if="$route.query.ticketrequest == true">
           <div id="caption">
             Enter your email and we’ll send your tickets right away!
           </div>
         </div>
-        <div class="card" v-if="!success">
-          <form>
-            <label for="email address" class="label">Email address</label>
-            <input type="text" placeholder="Enter your email" />
-
-            <button @click="payment">PAY N110,000</button>
-          </form>
-        </div>
         <div
           class="card-success"
-          v-if="success"
+          v-if="$route.query.ticketrequest == 'done'"
           role="region"
           aria-labelledby="descp"
         >
@@ -51,6 +43,14 @@
             BUY MORE TICKETS
           </button>
         </div>
+        <div class="card" v-else>
+          <form>
+            <label for="email address" class="label">Email address</label>
+            <input type="text" placeholder="Enter your email" />
+
+            <button @click="payment">PAY N110,000</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -70,8 +70,14 @@ export default {
   methods: {
     payment: function () {
       this.success = true;
+      this.$router.push({
+        path: "/ticket-request",
+        query: { ticketrequest: "done" },
+      });
+      console.log(this.$router);
     },
   },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>

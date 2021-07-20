@@ -30,7 +30,12 @@
       </button>
       <button
         class="text__button head__button"
-        @click="$router.push('/ticket-request')"
+        @click="
+          $router.push({
+            path: '/ticket-request',
+            query: { ticketrequest: true },
+          })
+        "
       >
         I didn’t get my tickets
       </button>
