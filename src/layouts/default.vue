@@ -1,6 +1,6 @@
 <template>
   <div id="default">
-    <div
+    <!-- <div
       v-if="$route.path != '/' && $route.query.ticketrequest != 'done'"
       style="position: fixed; height: 76vh; z-index: -11; top: 0; left: 28%"
     >
@@ -204,10 +204,10 @@
           />
         </g>
       </svg>
-    </div>
+    </div> -->
 
     <div
-      v-if="$route.path != '/' && $route.query.ticketrequest == null"
+      v-if="$route.path != '/'"
       style="position: fixed; height: 76vh; z-index: -11; top: 0; left: 28%"
     >
       <svg

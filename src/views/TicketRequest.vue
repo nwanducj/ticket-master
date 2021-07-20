@@ -2,14 +2,14 @@
   <div class="holder">
     <div class="holder__main">
       <div class="main" role="region" aria-labelledby="caption">
-        <div class="express" v-if="$route.query.ticketrequest == true">
+        <div class="express" v-if="!success">
           <div id="caption">
             Enter your email and we’ll send your tickets right away!
           </div>
         </div>
         <div
           class="card-success"
-          v-if="$route.query.ticketrequest == 'done'"
+          v-if="success"
           role="region"
           aria-labelledby="descp"
         >
@@ -43,7 +43,7 @@
             BUY MORE TICKETS
           </button>
         </div>
-        <div class="card" v-else>
+        <div class="card" v-if="!success">
           <form>
             <label for="email address" class="label">Email address</label>
             <input type="text" placeholder="Enter your email" />
@@ -70,11 +70,6 @@ export default {
   methods: {
     payment: function () {
       this.success = true;
-      this.$router.push({
-        path: "/ticket-request",
-        query: { ticketrequest: "done" },
-      });
-      console.log(this.$router);
     },
   },
   created() {},
@@ -88,7 +83,8 @@ export default {
     width: 100vw;
     z-index: 2;
     display: flex;
-    align-items: center;
+    // align-items: center;
+    margin-top: 20px;
     justify-items: center;
   }
 }
@@ -174,12 +170,12 @@ a {
       width: 100vw;
       z-index: 2;
       display: flex;
-      align-items: center;
+      // align-items: center;
       justify-items: center;
     }
   }
   .main {
-    padding: 10px 0;
+    padding: 00px 0;
     margin: 0 auto;
     width: 50%;
   }
@@ -225,7 +221,7 @@ a {
     border: 1px solid darken(#f2f2f2, 10);
   }
   .card {
-    width: 70%;
+    width: 470px;
     margin: 0px auto;
     background-color: white;
     height: 100%;
