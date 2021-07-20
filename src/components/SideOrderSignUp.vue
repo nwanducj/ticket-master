@@ -63,6 +63,7 @@
         <div class="price">{{ getFormattedPrice(totalPayment) }}</div>
       </div>
       <button @click="atFlutterwave">
+        PAY
         {{ getFormattedPrice(totalPayment) }}
       </button>
       <div class="flexx">
@@ -262,11 +263,11 @@ button {
   display: flex;
 }
 .money-1 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 .money-2 {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 input {
   outline: none;
