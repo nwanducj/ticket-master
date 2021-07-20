@@ -284,7 +284,7 @@ export default {
     color: #333333;
   }
   &__fulldate {
-    margin: 10px 0;
+    margin: 10px 0 10px 0;
     font-weight: 700;
     font-size: 1.2rem;
     color: #333333;
