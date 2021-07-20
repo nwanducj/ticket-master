@@ -119,9 +119,9 @@ input {
   border: 1px solid darken(#f2f2f2, 10);
 }
 .card {
-  width: 320px;
+  width: 250px;
   background-color: white;
-  padding: 30px 30px 70px 30px;
+  padding: 30px 10px 70px 10px;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #aaaaaa;
   text-align: center;
@@ -156,5 +156,19 @@ input {
 a {
   color: darken(lightblue, 30);
   text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  .card {
+    width: 320px;
+    background-color: white;
+    padding: 30px 10px 70px 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #aaaaaa;
+    text-align: center;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    &__main {
+      margin-top: 50px;
+    }
+  }
 }
 </style>

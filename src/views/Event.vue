@@ -104,7 +104,7 @@
       </div>
       <ThankYouMessage
         class="register"
-        v-if="completeSucesss"
+        v-if="true"
         @closeThankYouMessage="closeThankYouMessage"
       />
       <Register
@@ -224,7 +224,6 @@ export default {
 .line {
   margin: 20px 0;
 }
-
 .event {
   padding: 25px 0;
   &__detail {

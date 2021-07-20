@@ -117,7 +117,6 @@ export default {
   display: flex;
   align-items: center;
   justify-items: center;
-  background-color: red;
   z-index: 3;
   top: 0;
 }
