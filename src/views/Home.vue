@@ -98,11 +98,12 @@ export default {
   .event {
     &__date {
       width: 300px;
-      font-size: 10px;
+      font-size: 0.8rem;
       line-height: 14px;
       letter-spacing: 0px;
       text-align: left;
       margin: 5px 0 0px 0;
+      color: #4f4f4f;
     }
     &__name {
       width: 300px;
@@ -112,17 +113,19 @@ export default {
       line-height: 22px;
       letter-spacing: 0px;
       text-align: left;
+      color: #333333;
     }
 
     &__price {
       width: 300px;
       font-size: 14px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 17px;
       letter-spacing: 0.5px;
       text-align: left;
       margin: 0 0 10px 0;
+      color: #4f4f4f;
     }
     img {
       width: 300px;
@@ -138,7 +141,7 @@ export default {
 }
 .tag {
   width: 80%;
-  margin: 40px auto 20px auto;
+  margin: 40px auto 20px 10%;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 900;
@@ -199,7 +202,7 @@ export default {
   }
   .tag {
     width: 76%;
-    margin: 40px auto 20px auto;
+    margin: 40px auto 20px 10%;
     font-size: 2rem;
     font-size: 36px;
     font-style: normal;

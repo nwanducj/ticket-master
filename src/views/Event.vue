@@ -234,21 +234,25 @@ export default {
   }
   &__date__top {
     margin-top: 0;
+    color: #12122c;
   }
 
   &__name {
     font-size: 1.4rem;
     margin: 10px 0;
+    color: #12122c;
   }
   &__price {
     font-size: 1rem;
     margin: 15px 0;
+    color: #333333;
   }
   &__description {
     font-size: 0.9rem;
     margin: 10px 0;
     padding: 0 0 0 0;
     font-style: italic;
+    color: #4f4f4f;
   }
   &__image {
     order: 1;
@@ -265,31 +269,37 @@ export default {
   &__venue {
     width: 80%;
     margin: 0px 0 0 0;
+    color: #333333;
   }
   &__date {
     margin: 20px 0 0px 0;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.8rem;
+    color: #333333;
   }
   &__venue__text {
     margin: 0 0 0 0;
     font-weight: 500;
     font-size: 1rem;
+    color: #333333;
   }
   &__fulldate {
     margin: 10px 0;
     font-weight: 700;
     font-size: 1.2rem;
+    color: #333333;
   }
   &__address {
     margin: 10px 0;
     font-weight: 700;
     font-size: 1.2rem;
+    color: #333333;
   }
   &__links {
     margin: 15px 0 0 0;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.8rem;
+    color: #333333;
   }
   &__direction {
     display: flex;

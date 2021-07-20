@@ -8,7 +8,7 @@
           justify-content: space-between;
         "
       >
-        <span>ORDER SUMMARY</span>
+        <span style="font-weight: 700">ORDER SUMMARY</span>
         <i @click="$emit('closeSummary')" class="fa fa-times"></i>
       </div>
       <svg
@@ -21,7 +21,9 @@
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
       <div class="flex" v-for="(varieties, i) in getCart" :key="i">
-        <div>{{ varieties.qyt }} - {{ varieties.name }}</div>
+        <div style="font-weight: 700">
+          {{ varieties.qyt }} - {{ varieties.name }}
+        </div>
         <div>{{ getFormattedPrice(varieties.price * varieties.qyt) }}</div>
       </div>
       <svg
@@ -34,16 +36,18 @@
         <line y1="0.5" x2="368" y2="0.5" stroke="#BDBDBD" />
       </svg>
       <div class="flex">
-        <div>Sub-total</div>
+        <div style="font-weight: 700">Sub-total</div>
         <div>{{ getFormattedPrice(getSubTotal) }}</div>
       </div>
       <div class="flex">
-        <div>VAT</div>
+        <div style="font-weight: 700">VAT</div>
         <div>{{ getFormattedPrice(cart.vat) }}</div>
       </div>
       <div class="flex">
-        <div>TOTAL PAYMENT</div>
-        <div>{{ getFormattedPrice(cart.vat + getSubTotal) }}</div>
+        <div style="font-weight: 700">TOTAL PAYMENT</div>
+        <div style="font-weight: 700; font-size: 1rem">
+          {{ getFormattedPrice(cart.vat + getSubTotal) }}
+        </div>
       </div>
       <button @click="goNext">CONTINUE</button>
       <div class="guarantee">
@@ -184,6 +188,7 @@ button {
     display: flex;
     justify-content: space-between;
     margin: 15px 0;
+    font-size: 0.7rem;
   }
   button {
     background-color: #f5a623;
