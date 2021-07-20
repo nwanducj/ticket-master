@@ -82,7 +82,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .holder {
-  height: 78vh;
+  height: 70vh;
   &__main {
     height: 78vh;
     width: 100vw;
@@ -168,7 +168,7 @@ a {
 }
 @media screen and (min-width: 768px) {
   .holder {
-    height: 78vh;
+    height: 75vh;
     &__main {
       height: 78vh;
       width: 100vw;

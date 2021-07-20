@@ -25,11 +25,12 @@
       </svg>
     </a>
     <nav class="">
-      <button class="menuBtn" @click="$emit('toggleMenu')">
+      <button class="menuBtn" @click="$emit('toggleMenu')" role="button">
         <i class="fas fa-bars menu"></i>
       </button>
       <button
         class="text__button head__button"
+        role="button"
         @click="
           $router.push({
             path: '/ticket-request',
@@ -39,7 +40,9 @@
       >
         I didn’t get my tickets
       </button>
-      <button class="button__create head__button">CREATE YOUR OWN EVENT</button>
+      <button class="button__create head__button" aria-pressed="false">
+        CREATE YOUR OWN EVENT
+      </button>
     </nav>
   </header>
 </template>

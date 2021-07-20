@@ -452,7 +452,7 @@
         <button class="text__button" @click="gotoLink">
           I DID NOT GET MY TICKET
         </button>
-        <button>CREATE AN EVENT</button>
+        <button aria-label="Create an event">CREATE AN EVENT</button>
       </div>
     </div>
     <!-- <LoadingScreen
@@ -478,9 +478,12 @@ export default {
       this.clickedMenu = !this.clickedMenu;
     },
     gotoLink() {
-      this.$router.push("/ticket-request");
+      // this.$router.push("/ticket-request");
       this.clickedMenu = false;
-
+      this.$router.push({
+        path: "/ticket-request",
+        query: { ticketrequest: true },
+      });
       console.log(this.clickedMenu);
     },
   },

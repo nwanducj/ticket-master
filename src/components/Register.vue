@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card__head">
         <div>REGISTER FOR FREE</div>
-        <button class="closeBtn" @click="close">
+        <button class="closeBtn" @click="close" aria-label="close payment">
           <svg
             width="24"
             height="24"

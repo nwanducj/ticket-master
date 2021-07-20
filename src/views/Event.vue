@@ -227,7 +227,6 @@ export default {
 
 .event {
   padding: 25px 0;
-
   &__detail {
     display: block;
     width: 80%;

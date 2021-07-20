@@ -47,7 +47,11 @@
             {{ getFormattedPrice(varieties.price) }}
           </div>
           <div class="quantity">
-            <button class="add" @click="decreaseQyt(i)">
+            <button
+              class="add"
+              @click="decreaseQyt(i)"
+              aria-label="decrease quantity"
+            >
               <svg
                 width="24"
                 height="24"
@@ -102,7 +106,11 @@
               </svg>
             </button>
             <div class="qyt">{{ varieties.qyt }}</div>
-            <button class="add" @click="increaseQyt(i)">
+            <button
+              class="add"
+              @click="increaseQyt(i)"
+              aria-label="Increase quantity"
+            >
               <svg
                 width="24"
                 height="24"

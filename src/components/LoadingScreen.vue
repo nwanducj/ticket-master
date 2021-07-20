@@ -1,5 +1,6 @@
 <template>
   <div
+    aria-label="Loading screen"
     class="loading__holder"
     style="
       position: fixed;

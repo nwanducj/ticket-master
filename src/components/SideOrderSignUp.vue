@@ -2,7 +2,7 @@
   <div class="holder" id="payment">
     <div class="hold">
       <div class="holder__main" @click="goPrev">
-        <button class="back">
+        <button class="back" aria-label="go back">
           <svg
             width="20"
             height="20"
