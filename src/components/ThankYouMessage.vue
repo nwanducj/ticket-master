@@ -2,7 +2,7 @@
   <div class="holder" role="dialog" aria-labelledby="dialogTitle">
     <div class="card">
       <div style="float: right">
-        <button class="closeBtn" @click="$emit('closeThankYouMessage')">
+        <button class="closeBtn" @click="closeDialog">
           <svg
             width="24"
             height="24"
@@ -65,6 +65,12 @@ export default {
   name: "ThankYouMessage",
   data() {
     return {};
+  },
+  props: [],
+  methods: {
+    closeDialog() {
+      this.$router.push(`/`);
+    },
   },
 };
 </script>

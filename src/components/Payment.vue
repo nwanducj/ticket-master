@@ -196,6 +196,7 @@
       class="signup"
       @goBack="goBack"
       v-if="continueClicked"
+      :event="event"
       :totalPayment="totalPayment"
       :user="user"
       @paymentCompleted="$emit('paymentCompleted')"
@@ -211,7 +212,7 @@ import SideOrderSignUp from "@/components/SideOrderSignUp.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Payment",
-  props: ["closePayment", "paymentCompleted"],
+  props: ["closePayment", "paymentCompleted", "event"],
   computed: {
     ...mapGetters({
       userDto: "getUser",

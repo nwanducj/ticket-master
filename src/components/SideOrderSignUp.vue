@@ -94,6 +94,7 @@
 <script>
 import { formatCurrency } from "../static/utils.js";
 import { mapGetters } from "vuex";
+const axios = require("axios");
 export default {
   name: "SideOrderSignUp",
   data() {
@@ -103,12 +104,25 @@ export default {
         email: "",
         phoneNumber: "",
       },
-      flwKey: "FLWPUBK_TEST-b8c8e75ce8f503e20479433b751d8692-X",
+      flwKey: "FLWPUBK_TEST-65c6459da4b3fa0ae7b0d22ca0dd10b3-X",
       currency: "NGN",
       country: "NG",
+      paymentData: {
+        card_number: "4242424242424242",
+        cvv: "812",
+        expiry_month: "10",
+        expiry_year: "22",
+        currency: "NGN",
+        amount: "",
+        email: "",
+        fullname: "",
+        tx_ref: "MC-3243e",
+        redirect_url:
+          "https://webhook.site/3ed41e38-2c79-4c79-b455-97398730866c",
+      },
     };
   },
-  props: ["goBack", "totalPayment", "user", "paymentCompleted"],
+  props: ["goBack", "totalPayment", "user", "paymentCompleted", "event"],
   computed: {
     referenceFlutter() {
       const date = Date.now();
@@ -142,9 +156,9 @@ export default {
         },
         callback: (response) => this.callbackFlutter(response),
         customizations: {
-          title: "Nexbuy District | Wallet Funding",
-          description: "Funding wallet",
-          logo: "https://firebasestorage.googleapis.com/v0/b/nexbuy-d2da3.appspot.com/o/emailPictures%2FB1.png?alt=media&token=426d5cd2-3618-45c9-9c6d-bb301123b7ee",
+          title: "Ticket Master",
+          description: "GET A TICKET",
+          //  logo: "https://firebasestorage.googleapis.com/v0/b/nexbuy-d2da3.appspot.com/o/emailPictures%2FB1.png?alt=media&token=426d5cd2-3618-45c9-9c6d-bb301123b7ee",
         },
         close: this.closeFlutter(),
       });
@@ -152,15 +166,48 @@ export default {
     callbackFlutter: function () {
       console.log("Proceeding to payment");
       this.$emit("paymentCompleted");
+      this.$router.push({
+        path: `/event/${this.event.id}`,
+        query: { paid: true },
+      });
     },
     closeFlutter: function () {
       console.log("Proceeding to payment");
       this.$emit("paymentCompleted");
+      this.$router.push({
+        path: `/event/${this.event.id}`,
+        query: { paid: false },
+      });
+    },
+    payWithFlw() {
+      let headers = {
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${"FLWSECK_TEST-de54ccfe7881e43fd9a90568b3d3ce87-X"}`,
+      };
+      axios
+        .post(
+          "https://api.flutterwave.com/v3/charges?type=card",
+          {
+            ...this.paymentData,
+            client: "FLWPUBK_TEST-b8c8e75ce8f503e20479433b751d8692-X",
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   created() {
     if (this.user) {
       this.person = this.user;
+      this.paymentData.email = this.user.email;
+      this.paymentData.fullname = this.user.fullname;
+      this.paymentData.amount = this.totalPayment;
     }
   },
 };

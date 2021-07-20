@@ -174,6 +174,7 @@ button {
   .holder {
     background-color: white;
     height: 100vh;
+    border-radius: 0px 0px 0 0;
   }
   .hold {
     width: 80%;

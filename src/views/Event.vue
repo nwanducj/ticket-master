@@ -115,6 +115,7 @@
       />
       <Payment
         class="payment"
+        :event="event"
         v-if="payment && !loading"
         @closePayment="closePayment"
         @paymentCompleted="paymentCompleted"
@@ -190,15 +191,16 @@ export default {
     closeRegister: function () {
       this.register = false;
     },
-    closeThankYouMessage: function () {
-      this.overlay = false;
+    closeThankYouMessage() {
       this.completeSuccess = false;
     },
   },
 
   created() {
     let id = this.$route.params.event_id;
-    this.loading = true
+    console.log(this.$route.query);
+    this.completeSucesss = this.$route.query.paid;
+    this.loading = true;
     try {
       axios
         .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
