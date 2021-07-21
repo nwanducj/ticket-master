@@ -144,7 +144,7 @@ export default {
 .tag {
   width: 80%;
   margin: 40px auto 20px 10%;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 900;
   line-height: 40px;
