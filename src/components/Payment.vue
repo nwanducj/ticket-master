@@ -227,7 +227,6 @@ export default {
       this.cart.varieties.forEach((item) => {
         if (item.qyt > 0) {
           total += item.price * item.qyt * 1;
-          console.log(total);
         }
       });
 
@@ -259,7 +258,6 @@ export default {
       this.summaryOpen = true;
     },
     getFormattedPrice: function (price) {
-      console.log(price);
       return formatCurrency(price);
     },
     getDate(date) {
@@ -304,7 +302,6 @@ export default {
   mounted() {
     if (this.userDto) {
       this.user = this.userDto;
-      console.log(this.cart);
     }
   },
 };

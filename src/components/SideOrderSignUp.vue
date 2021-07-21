@@ -95,7 +95,7 @@
 <script>
 import { formatCurrency } from "../static/utils.js";
 import { mapGetters } from "vuex";
-const axios = require("axios");
+// const axios = require("axios");
 export default {
   name: "SideOrderSignUp",
   data() {
@@ -139,7 +139,6 @@ export default {
       this.$emit("goBack");
     },
     getFormattedPrice: function (price) {
-      console.log(price);
       return formatCurrency(price);
     },
 
@@ -165,7 +164,6 @@ export default {
       });
     },
     callbackFlutter: function () {
-      console.log("Proceeding to payment");
       this.$emit("paymentCompleted");
       this.$router.push({
         path: `/event/${this.event.id}`,
@@ -173,34 +171,11 @@ export default {
       });
     },
     closeFlutter: function () {
-      console.log("Proceeding to payment");
       this.$emit("paymentCompleted");
       this.$router.push({
         path: `/event/${this.event.id}`,
-        query: { paid: false },
+        query: { paid: null },
       });
-    },
-    payWithFlw() {
-      let headers = {
-        "Access-Control-Allow-Headers": "X-Requested-With",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${"FLWSECK_TEST-de54ccfe7881e43fd9a90568b3d3ce87-X"}`,
-      };
-      axios
-        .post(
-          "https://api.flutterwave.com/v3/charges?type=card",
-          {
-            ...this.paymentData,
-            client: "FLWPUBK_TEST-b8c8e75ce8f503e20479433b751d8692-X",
-          },
-          { headers: headers }
-        )
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
   created() {

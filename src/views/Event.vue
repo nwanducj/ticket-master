@@ -151,7 +151,7 @@ export default {
   },
   methods: {
     getFormattedPrice: function (price) {
-      console.log(price);
+      price;
       return formatCurrency(price);
     },
     getDate(date) {
@@ -192,7 +192,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route);
+    this.$route;
     // this.completeSuccess = this.$route.query.paid;
   },
   created() {

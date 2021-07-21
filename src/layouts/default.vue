@@ -275,12 +275,9 @@ export default {
         path: "/ticket-request",
         query: { ticketrequest: true },
       });
-      console.log(this.clickedMenu);
     },
   },
-  created() {
-    console.log(this.$route.path);
-  },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>

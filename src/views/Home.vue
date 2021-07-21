@@ -65,13 +65,12 @@ export default {
   methods: {
     getDate(date) {
       let new_date = new Date(date);
-      console.log(new_date);
+
       let formated_date = new_date.toLocaleString("en-US", {
         day: "numeric", // numeric, 2-digit
         year: "numeric", // numeric, 2-digit
         month: "long", // numeric, 2-digit, long, short, narrow
       });
-      console.log(formated_date);
       return formated_date;
     },
   },
@@ -80,7 +79,6 @@ export default {
       .get("https://eventsflw.herokuapp.com/v1/events")
       .then((response) => {
         let list = response.data;
-        console.log(list.data.events);
         this.events = list.data.events;
         this.loading = false;
       })
@@ -144,7 +142,7 @@ export default {
 .tag {
   width: 80%;
   margin: 40px auto 20px 10%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 900;
   line-height: 40px;

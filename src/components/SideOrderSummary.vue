@@ -99,7 +99,6 @@ export default {
       this.cart.varieties.forEach((item) => {
         if (item.qyt > 0) {
           total += item.price * item.qyt * 1;
-          console.log(total);
         }
       });
 
@@ -109,7 +108,6 @@ export default {
   },
   methods: {
     getFormattedPrice: function (price) {
-      console.log(price);
       return formatCurrency(price);
     },
     goNext: function () {
