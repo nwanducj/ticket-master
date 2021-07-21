@@ -102,11 +102,7 @@
           </ul>
         </div>
       </div>
-      <ThankYouMessage
-        class="register"
-        v-if="true"
-        @closeThankYouMessage="closeThankYouMessage"
-      />
+      <ThankYouMessage class="register" v-if="completeSuccess" />
       <Register
         class="register"
         v-if="register"
@@ -144,7 +140,7 @@ export default {
       register: false,
       event: {},
       loading: false,
-      completeSucesss: false,
+      completeSuccess: false,
     };
   },
   components: { ThankYouMessage, Register, Payment, LoadingScreen },
@@ -195,11 +191,12 @@ export default {
       this.completeSuccess = false;
     },
   },
-
+  mounted() {
+    console.log(this.$route);
+    // this.completeSuccess = this.$route.query.paid;
+  },
   created() {
     let id = this.$route.params.event_id;
-    console.log(this.$route.query);
-    this.completeSucesss = this.$route.query.paid;
     this.loading = true;
     try {
       axios
@@ -208,6 +205,8 @@ export default {
           let list = response.data;
           this.event = list.data;
           this.loading = false;
+          this.completeSuccess = this.$route.query.paid;
+          // this.completeSuccess = false;
         })
         .catch((err) => {
           console.log(err);

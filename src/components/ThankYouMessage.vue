@@ -69,7 +69,7 @@ export default {
   props: [],
   methods: {
     closeDialog() {
-      this.$router.push(`/`);
+      this.$router.push("/");
     },
   },
 };

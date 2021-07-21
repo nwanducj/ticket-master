@@ -6,7 +6,9 @@
         <div
           v-for="(event, i) in events"
           :key="i"
-          @click="$router.push(`/event/${event.id}`)"
+          @click="
+            $router.push({ path: `/event/${event.id}`, query: { paid: null } })
+          "
           role="button"
         >
           <div

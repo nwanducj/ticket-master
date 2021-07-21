@@ -322,6 +322,7 @@ button {
 }
 .closeBtn {
   margin-top: -10px;
+  margin-right: 20px;
 }
 .title__holder {
   margin: 20px 0 25px 0;
@@ -401,6 +402,10 @@ button {
   .qyt {
     // padding: 0 0 10px 0;
     margin: 0 10px;
+  }
+  .closeBtn {
+    margin-top: -10px;
+    margin-right: 0;
   }
 
   button {
