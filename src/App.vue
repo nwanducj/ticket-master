@@ -29,17 +29,26 @@ export default {
 <style lang="scss">
 #app {
   position: relative;
-  width: 100vw;
   margin: 0;
+  min-height: 100vh;
 }
-.header {
+a {
+  color: black;
+}
+button {
+  border: 0;
+  background-color: #f2f2f2;
+}
+.wrapper {
   width: 81.5%;
   margin: 0 auto;
 }
-.footer {
-  width: 83%;
-  margin: 0 auto 100px auto;
+footer {
+  width: 81.25%;
+  margin: 0 auto;
   position: absolute;
-  left: 10%;
+  bottom: 0;
+  right: 10px;
+  left: 10px;
 }
 </style>

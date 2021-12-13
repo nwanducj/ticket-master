@@ -1,9 +1,9 @@
 <template>
   <footer class="flex">
-    <div class="terms">Copyright 2019. Flutterwave inc</div>
+    <p class="terms">Copyright 2019. Flutterwave Inc</p>
     <div class="terms">
-      <a>Terms and condition</a>
-      <a class="policy">Policy Privacy</a>
+      <a href="#">Terms and condition</a>
+      <a href="#" class="policy">Policy Privacy</a>
     </div>
   </footer>
 </template>
