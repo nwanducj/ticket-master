@@ -18,7 +18,7 @@ button {
   color: white;
   border: 0;
   height: 36.6px;
-  width: 206px;
+  padding: 0 16px;
   border-radius: 4.07px;
   font-size: 12px;
   font-style: normal;

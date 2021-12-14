@@ -26,7 +26,7 @@
     <main role="main">
       <slot />
     </main>
-    <div class="fullnav" v-if="clickedMenu">
+    <div v-if="clickedMenu">
       <button class="closeBtn" @click="toggleMenu">
         <svg
           width="18"
@@ -57,6 +57,13 @@
       />
       <BaseButton :text="'CREATE YOUR OWN EVENT'" />
     </div>
+    <footer class="flex">
+      <p class="terms">Copyright 2019. Flutterwave Inc</p>
+      <div class="terms">
+        <a href="#">Terms and condition</a>
+        <a href="#" class="policy">Policy Privacy</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -78,7 +85,6 @@ export default {
       this.clickedMenu = !this.clickedMenu;
     },
     gotoLink() {
-      // this.$router.push("/ticket-request");
       this.clickedMenu = false;
       this.$router.push({
         path: "/ticket-request",
@@ -93,6 +99,9 @@ export default {
 .menu {
   display: none;
 }
+header {
+  margin-top: 21px;
+}
 nav {
   display: flex;
   justify-content: space-between;
@@ -104,6 +113,27 @@ nav {
     }
   }
 }
+.flex {
+  display: flex;
+  align-items: center;
+
+  .terms {
+    display: flex;
+    margin: 20px 0 0 0;
+  }
+  .policy {
+    margin: 0px 0 0 40px;
+  }
+}
 @media screen and (min-width: 768px) {
+  .flex {
+    display: flex;
+    .terms {
+      display: flex;
+    }
+    .policy {
+      margin: 0 0 0 48px;
+    }
+  }
 }
 </style>

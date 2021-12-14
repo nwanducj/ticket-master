@@ -40,15 +40,16 @@ button {
   background-color: #f2f2f2;
 }
 .wrapper {
-  width: 81.5%;
+  width: 86%;
   margin: 0 auto;
+}
+button:hover {
+  cursor: pointer;
 }
 footer {
   width: 81.25%;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-  left: 10px;
+  display: flex;
+  margin: 0 auto 21px auto;
+  justify-content: space-between;
 }
 </style>

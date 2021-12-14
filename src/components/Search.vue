@@ -27,11 +27,10 @@ input {
   border: 0;
   margin-left: 20px;
   background-color: #f2f2f2;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 input:focus {
   outline: none;
-  border: 0;
   /* border-bottom: 1px grey solid; */
 }
 </style>
