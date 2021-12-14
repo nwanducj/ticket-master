@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Event from '../views/Event.vue'
 import TicketRequest from '../views/TicketRequest.vue'
-import Test from '../views/test.vue'
 
 const routes = [
   {
@@ -13,7 +12,6 @@ const routes = [
   {
     path: '/event/:event_id',
     name: 'Event',
-    // meta: { layout: "payment" },
     component: Event
   },
 
@@ -21,11 +19,6 @@ const routes = [
     path: '/ticket-request',
     name: 'Ticket Request',
     component: TicketRequest
-  },
-  {
-    path: '/*',
-    name: '404',
-    component: Test
   },
 ]
 

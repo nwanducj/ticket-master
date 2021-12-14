@@ -15,10 +15,10 @@ export default {
 }
 .input-field {
   position: relative;
-  width: 218px;
   border-bottom: 1px grey solid;
-  display: inline;
+  display: block;
   height: 29px;
+  width: 100%;
 }
 img {
   position: absolute;
@@ -27,10 +27,8 @@ input {
   border: 0;
   margin-left: 20px;
   background-color: #f2f2f2;
-  margin-bottom: 20px;
 }
 input:focus {
   outline: none;
-  /* border-bottom: 1px grey solid; */
 }
 </style>

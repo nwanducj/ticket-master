@@ -1,16 +1,21 @@
 <template>
   <div class="wrapper" v-if="!loading">
     <div class="hero">
-      <h3 class="tag">The best events happening now.</h3>
+      <div>
+        <h3 class="hero__title">The best events happening now.</h3>
+      </div>
       <div class="location">
-        <Search />
-        <p class="location__name"><strong>Lagos, Nigeria</strong></p>
-        <button>
-          <img src="@/assets/images/Frame.svg" />
-        </button>
+        <search />
+        <div class="location__handler">
+          <p class="location__name"><strong>Lagos, Nigeria</strong></p>
+          <button>
+            <img src="@/assets/images/Frame.svg" />
+          </button>
+        </div>
       </div>
     </div>
-    <div class="events" role="grid">
+
+    <div class="events">
       <div class="event" v-for="i in 36" :key="i">
         <img src="@/assets/images/Event-image.png" class="image" />
         <div class="event__date">8TH DECEMBER 2021</div>
@@ -38,19 +43,12 @@ export default {
       events: [],
     };
   },
-  components: { LoadingScreen, Search, BaseButton },
-  methods: {
-    getDate(date) {
-      let new_date = new Date(date);
-
-      let formated_date = new_date.toLocaleString("en-US", {
-        day: "numeric", // numeric, 2-digit
-        year: "numeric", // numeric, 2-digit
-        month: "long", // numeric, 2-digit, long, short, narrow
-      });
-      return formated_date;
-    },
+  components: {
+    LoadingScreen,
+    Search,
+    BaseButton,
   },
+  methods: {},
   created() {
     axios
       .get("https://eventsflw.herokuapp.com/v1/events", {
@@ -83,25 +81,44 @@ export default {
   height: 231px;
 }
 .hero {
-  display: flex;
-  justify-content: space-between;
-}
-.location {
-  display: flex;
-  align-items: center;
-  &__name {
-    margin-left: 10px;
-    font-size: 1.2rem;
-    line-height: 23px;
-    letter-spacing: 0.5px;
-    text-align: left;
+  /* background-color: red; */
+  &__title {
+    font-size: 1.5rem;
+    line-height: 40px;
+    height: 40px;
+    @media screen and (min-width: 768px) {
+      font-size: 2.25rem;
+    }
   }
-}
-.tag {
-  font-size: 2.25rem;
-  line-height: 40px;
-  height: 40px;
-  left: 100px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .location {
+    margin-top: 50px;
+    @media screen and (min-width: 768px) {
+      margin-top: 0px;
+      width: 420px;
+      align-items: center;
+      display: flex;
+    }
+    &__handler {
+      width: 300px;
+      display: flex;
+      /* margin-top: -10px; */
+    }
+    &__name {
+      font-size: 0.8rem;
+      line-height: 23px;
+      letter-spacing: 0.5px;
+
+      @media screen and (min-width: 768px) {
+        margin-left: 10px;
+        font-size: 1.2rem;
+      }
+    }
+  }
 }
 .events {
   display: grid;

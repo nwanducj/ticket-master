@@ -35,6 +35,10 @@ export default {
 a {
   color: black;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
 button {
   border: 0;
   background-color: #f2f2f2;

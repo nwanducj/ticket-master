@@ -57,11 +57,13 @@
       />
       <BaseButton :text="'CREATE YOUR OWN EVENT'" />
     </div>
-    <footer class="flex">
-      <p class="terms">Copyright 2019. Flutterwave Inc</p>
-      <div class="terms">
-        <a href="#">Terms and condition</a>
-        <a href="#" class="policy">Policy Privacy</a>
+    <footer>
+      <p>Copyright 2019. Flutterwave Inc</p>
+      <div>
+        <ul>
+          <li><a href="#">Terms and condition</a></li>
+          <li><a href="#" class="policy">Policy Privacy</a></li>
+        </ul>
       </div>
     </footer>
   </div>
@@ -96,9 +98,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.menu {
-  display: none;
-}
 header {
   margin-top: 21px;
 }
@@ -109,30 +108,42 @@ nav {
   ul {
     list-style: none;
     li {
+      display: none;
+    }
+    .menu {
       display: inline;
     }
-  }
-}
-.flex {
-  display: flex;
-  align-items: center;
-
-  .terms {
-    display: flex;
-    margin: 20px 0 0 0;
-  }
-  .policy {
-    margin: 0px 0 0 40px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .flex {
-    display: flex;
-    .terms {
-      display: flex;
+    @media screen and (min-width: 768px) {
+      li {
+        display: inline;
+      }
+      .menu {
+        display: none;
+      }
     }
-    .policy {
-      margin: 0 0 0 48px;
+  }
+}
+footer {
+  display: block;
+  width: 90%;
+  margin: 0 auto 21px auto;
+  ul {
+    li {
+      margin-top: 20px;
+    }
+  }
+  a {
+    display: block;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    width: 81.25%;
+    justify-content: space-between;
+    ul {
+      display: flex;
+      :last-child {
+        margin-left: 20px;
+      }
     }
   }
 }
