@@ -82,22 +82,33 @@ export default {
 }
 .hero {
   /* background-color: red; */
+  margin-top: 40px;
   &__title {
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     line-height: 40px;
     height: 40px;
+
     @media screen and (min-width: 768px) {
       font-size: 2.25rem;
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 992px) {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .location {
-    margin-top: 50px;
+    margin-top: 80px;
+    @media screen and (min-width: 660px) {
+      margin-top: 0px;
+    }
     @media screen and (min-width: 768px) {
+      margin-top: 0px;
+      width: 420px;
+      align-items: center;
+      display: block;
+    }
+    @media screen and (min-width: 992px) {
       margin-top: 0px;
       width: 420px;
       align-items: center;
@@ -124,6 +135,12 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
+  @media screen and (min-width: 660px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 .event {
   margin-top: 40px;
@@ -151,14 +168,6 @@ export default {
     line-height: 17px;
     letter-spacing: 0.5px;
     text-align: left;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .events {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
   }
 }
 </style>

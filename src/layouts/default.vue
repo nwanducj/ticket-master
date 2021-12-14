@@ -135,7 +135,7 @@ footer {
   a {
     display: block;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 660px) {
     display: flex;
     width: 81.25%;
     justify-content: space-between;
@@ -143,6 +143,9 @@ footer {
       display: flex;
       :last-child {
         margin-left: 20px;
+      }
+      li {
+        margin-top: 0px;
       }
     }
   }

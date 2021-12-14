@@ -28,6 +28,7 @@ export default {
 </script>
 <style lang="scss">
 #app {
+  box-sizing: border-box;
   position: relative;
   margin: 0;
   min-height: 100vh;
@@ -49,11 +50,5 @@ button {
 }
 button:hover {
   cursor: pointer;
-}
-footer {
-  width: 81.25%;
-  display: flex;
-  margin: 0 auto 21px auto;
-  justify-content: space-between;
 }
 </style>
