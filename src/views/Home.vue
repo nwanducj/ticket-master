@@ -18,21 +18,32 @@
     <div class="events">
       <div class="event" v-for="i in 36" :key="i">
         <img src="@/assets/images/Event-image.png" class="image" />
-        <div class="event__date">8TH DECEMBER 2021</div>
-        <div class="event__name" id="caption">Wizkid Made In Lagos</div>
-        <div class="event__price">N5,000 - N200,000</div>
+        <span class="event__date">8TH DECEMBER 2021</span>
+        <h5 class="event__name" id="caption">Wizkid Made In Lagos</h5>
+        <div class="event__price">
+          <span>NGN 5,000</span> - <span>NGN 200,000</span>
+        </div>
       </div>
     </div>
     <div class="more">
-      <BaseButton :text="'LOAD MORE'" />
+      <LoadButton :text="'LOAD MORE'" />
     </div>
+    <footer>
+      <p>Copyright 2019. Flutterwave Inc</p>
+      <span>
+        <ul>
+          <li><a href="#">Terms and condition</a></li>
+          <li><a href="#" class="policy">Policy Privacy</a></li>
+        </ul>
+      </span>
+    </footer>
   </div>
   <LoadingScreen v-else style="position: fixed; height: 100vh; bottom: 0" />
 </template>
 
 <script>
 import LoadingScreen from "../components/LoadingScreen.vue";
-import BaseButton from "../components/BaseButton.vue";
+import LoadButton from "../components/LoadButton.vue";
 import Search from "../components/Search.vue";
 const axios = require("axios");
 export default {
@@ -46,7 +57,7 @@ export default {
   components: {
     LoadingScreen,
     Search,
-    BaseButton,
+    LoadButton,
   },
   methods: {},
   created() {
@@ -168,6 +179,34 @@ export default {
     line-height: 17px;
     letter-spacing: 0.5px;
     text-align: left;
+  }
+}
+
+footer {
+  display: block;
+  /* width: 90%; */
+  margin: 0 auto 0px auto;
+  ul {
+    li {
+      margin-top: 20px;
+    }
+  }
+  a {
+    display: block;
+  }
+  @media screen and (min-width: 660px) {
+    display: flex;
+    /* width: 81.25%; */
+    justify-content: space-between;
+    ul {
+      display: flex;
+      :last-child {
+        margin-left: 20px;
+      }
+      li {
+        margin-top: 0px;
+      }
+    }
   }
 }
 </style>
