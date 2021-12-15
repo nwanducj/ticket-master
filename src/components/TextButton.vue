@@ -23,4 +23,7 @@ button {
   letter-spacing: 0.508366px;
   color: #333333;
 }
+button:hover {
+  background-color: #f5a623;
+}
 </style>
