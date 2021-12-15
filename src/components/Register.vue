@@ -82,27 +82,10 @@ export default {
 
 
 <style scoped lang="scss">
-.express > div {
-  display: inline;
-  padding: 0 30%;
-  width: 40%;
-  text-align: center;
-}
-.express {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
 .desc {
   margin: 15px 0;
 }
-.label {
-  font-size: 0.9rem;
-  color: #333333;
-}
+
 a {
   color: darken(lightblue, 30);
   text-decoration: none;
@@ -134,36 +117,6 @@ a {
     align-items: center;
     font-size: 0.8rem;
     border-bottom: 1px solid #aaa;
-  }
-}
-@media screen and (min-width: 768px) {
-  .register__form {
-    margin-top: 20px;
-  }
-
-  .express > div {
-    display: inline;
-    padding: 0 30%;
-    width: 40%;
-    text-align: center;
-  }
-  .express {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  .desc {
-    margin: 15px 0;
-  }
-  .label {
-    font-size: 0.9rem;
-    color: #333333;
-  }
-  a {
-    color: darken(lightblue, 30);
-    text-decoration: none;
   }
 }
 </style>
