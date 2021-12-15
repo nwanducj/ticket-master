@@ -51,4 +51,20 @@ button {
 button:hover {
   cursor: pointer;
 }
+.card {
+  background-color: #ffffff;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 50px;
+  width: 300px;
+  margin: 0 auto;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+  &--center {
+    text-align: center;
+  }
+  @media screen and (min-width: 786px) {
+    width: 470px;
+  }
+}
 </style>

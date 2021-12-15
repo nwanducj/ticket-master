@@ -87,10 +87,10 @@
             </ul>
           </div>
         </div>
-        <ThankYouMessage class="register" v-if="completeSuccess" />
+        <ThankYouMessage class="register" v-if="false" />
         <Register
           class="register"
-          v-if="register"
+          v-if="true"
           @closeRegister="closeRegister"
           @continueFromRegister="continueFromRegister"
         />
@@ -281,6 +281,7 @@ export default {
     @media screen and (min-width: 768px) {
       width: 50%;
       order: 1;
+      margin: 0 40px 0px 0px;
     }
   }
   &__two {

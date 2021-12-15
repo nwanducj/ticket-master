@@ -33,7 +33,7 @@ div {
 footer {
   display: block;
   width: 90%;
-  margin: 0 auto 0px auto;
+  margin: 100px auto 0px auto;
   ul {
     li {
       margin-top: 20px;
