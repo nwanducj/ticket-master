@@ -57,15 +57,6 @@
       />
       <BaseButton :text="'CREATE YOUR OWN EVENT'" />
     </div>
-    <footer>
-      <p>Copyright 2019. Flutterwave Inc</p>
-      <div>
-        <ul>
-          <li><a href="#">Terms and condition</a></li>
-          <li><a href="#" class="policy">Policy Privacy</a></li>
-        </ul>
-      </div>
-    </footer>
   </div>
 </template>
 
@@ -119,33 +110,6 @@ nav {
       }
       .menu {
         display: none;
-      }
-    }
-  }
-}
-footer {
-  display: block;
-  width: 90%;
-  margin: 0 auto 21px auto;
-  ul {
-    li {
-      margin-top: 20px;
-    }
-  }
-  a {
-    display: block;
-  }
-  @media screen and (min-width: 660px) {
-    display: flex;
-    width: 81.25%;
-    justify-content: space-between;
-    ul {
-      display: flex;
-      :last-child {
-        margin-left: 20px;
-      }
-      li {
-        margin-top: 0px;
       }
     }
   }
