@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div>
     <component :is="layout">
       <router-view />
     </component>
@@ -52,18 +52,19 @@ button:hover {
   cursor: pointer;
 }
 .card {
+  box-sizing: border-box;
   background-color: #ffffff;
-  justify-content: center;
   border-radius: 10px;
-  padding: 50px;
-  width: 300px;
-  margin: 0 auto;
+  width: 80%;
+  padding: 20px;
   box-shadow: 0px 4px 4px 0px #00000040;
+  margin: 0 auto;
 
   &--center {
     text-align: center;
   }
   @media screen and (min-width: 786px) {
+    padding: 50px;
     width: 470px;
   }
 }

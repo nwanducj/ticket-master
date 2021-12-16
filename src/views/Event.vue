@@ -88,7 +88,7 @@
           </div>
         </div>
         <ThankYouMessage class="register" v-if="false" />
-        <Register
+        <register
           class="register"
           v-if="true"
           @closeRegister="closeRegister"
@@ -96,7 +96,7 @@
         />
         <Payment
           class="payment"
-          :event="event"
+          :event="false"
           v-if="payment && !loading"
           @closePayment="closePayment"
           @paymentCompleted="paymentCompleted"

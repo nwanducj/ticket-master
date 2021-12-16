@@ -8,7 +8,14 @@
           </a>
           <ul>
             <li class="menu">
-              <IconButton name="fas fa-bars menu" @buttonClicked="toggleMenu" />
+              <button>
+                <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
+                  />
+                </svg>
+              </button>
             </li>
             <li>
               <ButtonText
@@ -63,7 +70,6 @@
 <script>
 import BaseButton from "@/components//BaseButton.vue";
 import ButtonText from "@/components//TextButton.vue";
-import IconButton from "@/components//IconButton.vue";
 export default {
   data() {
     return { show: true, clickedMenu: false };
@@ -71,7 +77,6 @@ export default {
   components: {
     BaseButton,
     ButtonText,
-    IconButton,
   },
   methods: {
     toggleMenu() {
@@ -113,5 +118,9 @@ nav {
       }
     }
   }
+}
+.fas {
+  width: 100px;
+  height: 100px;
 }
 </style>

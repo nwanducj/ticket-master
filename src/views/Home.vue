@@ -184,7 +184,6 @@ export default {
 
 footer {
   display: block;
-  /* width: 90%; */
   margin: 0 auto 0px auto;
   ul {
     li {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <overlay>
-      <div class="heading">
+      <div class="heading" v-show="false">
         <p id="caption">
           Enter your email and we’ll send your tickets right away!
         </p>
@@ -10,7 +10,7 @@
         class="card card--center"
         role="region"
         aria-labelledby="descp"
-        v-if="false"
+        v-show="true"
       >
         <img src="@/assets/images/check.svg" />
         <p id="descp" class="descp">
@@ -22,7 +22,7 @@
           :text="'BUY MORE TICKETS'"
         />
       </div>
-      <div class="card">
+      <div class="card" v-show="false">
         <form>
           <input-field :label="'Email Address'" />
           <big-button @buttonClicked="payment" :text="'PAY N110,000'" />
@@ -63,17 +63,22 @@ export default {
 .descp {
   margin: 25px 0;
 }
+.card {
+  margin-top: 40px;
+}
 .heading {
   text-align: center;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 0 40px;
-  width: 390px;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
   letter-spacing: 0px;
   text-align: center;
+  @media screen and (min-width: 768px) {
+    width: 390px;
+  }
 }
 a span {
   color: rgb(103, 103, 255);
