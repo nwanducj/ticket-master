@@ -17,12 +17,14 @@
 
     <div class="events">
       <div class="event" v-for="i in 36" :key="i">
-        <img src="@/assets/images/Event-image.png" class="image" />
-        <span class="event__date">8TH DECEMBER 2021</span>
-        <h5 class="event__name" id="caption">Wizkid Made In Lagos</h5>
-        <div class="event__price">
-          <span>NGN 5,000</span> - <span>NGN 200,000</span>
-        </div>
+        <a href="/event">
+          <img src="@/assets/images/Event-image.png" class="image" />
+          <span class="event__date">8TH DECEMBER 2021</span>
+          <h5 class="event__name" id="caption">Wizkid Made In Lagos</h5>
+          <div class="event__price">
+            <span>NGN 5,000</span> - <span>NGN 200,000</span>
+          </div>
+        </a>
       </div>
     </div>
     <div class="more">

@@ -20,7 +20,6 @@ export default {
 <style lang="scss" scoped>
 div {
   background-repeat: no-repeat;
-
   background-position: 100%;
   background-size: contain;
   width: 100%;

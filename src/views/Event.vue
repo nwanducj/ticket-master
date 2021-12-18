@@ -8,7 +8,7 @@
           </div>
           <div class="event__one" role="article">
             <p class="event__date__top">{{ new Date().toDateString() }}</p>
-            <h1 class="event__name">
+            <h1 class="event__name btn">
               Big Wiz Event At LandMark Oniru, Lagos. Special Event. Attend
               Tommorrow
             </h1>
@@ -21,7 +21,12 @@
               <span>{{ getFormattedPrice(5000) }}</span> -
               <span>{{ getFormattedPrice(10000) }}</span>
             </div>
-            <big-button :text="'BUY NOW'" />
+            <div class="btn">
+              <big-button
+                :text="'BUY NOW'"
+                @buttonClicked="showPayment = true"
+              />
+            </div>
           </div>
         </div>
         <div class="event__two">
@@ -87,19 +92,12 @@
             </ul>
           </div>
         </div>
-        <ThankYouMessage class="register" v-if="false" />
+        <ThankYouMessage class="register" v-show="false" />
         <register
           class="register"
-          v-if="true"
+          v-show="false"
           @closeRegister="closeRegister"
           @continueFromRegister="continueFromRegister"
-        />
-        <Payment
-          class="payment"
-          :event="false"
-          v-if="payment && !loading"
-          @closePayment="closePayment"
-          @paymentCompleted="paymentCompleted"
         />
       </div>
       <LoadingScreen
@@ -107,6 +105,7 @@
         style="position: fixed; height: 100vh; top: 0; z-index: 30"
       />
     </overlay>
+    <MakePayment v-if="showPayment" @close="showPayment = false" />
   </div>
 </template>
 
@@ -115,8 +114,8 @@ import { formatCurrency } from "../static/utils.js";
 import ThankYouMessage from "../components/ThankYouMessage.vue";
 import LoadingScreen from "../components/LoadingScreen.vue";
 import Register from "../components/Register.vue";
-import Payment from "../components/Payment.vue";
 import Overlay from "../components/Overlay.vue";
+import MakePayment from "../components/MakePayment.vue";
 import BigButton from "../components/BigButton.vue";
 import { mapGetters } from "vuex";
 const axios = require("axios");
@@ -124,7 +123,7 @@ export default {
   name: "Event",
   data() {
     return {
-      payment: false,
+      showPayment: false,
       register: false,
       event: {},
       loading: false,
@@ -134,8 +133,8 @@ export default {
   components: {
     ThankYouMessage,
     Register,
-    Payment,
     LoadingScreen,
+    MakePayment,
     Overlay,
     BigButton,
   },
@@ -215,6 +214,12 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.btn {
+  width: 100%;
+  @media screen and(min-width:768px) {
+    width: 400px;
+  }
+}
 .event {
   &__detail {
     display: block;
@@ -240,10 +245,11 @@ export default {
   }
 
   &__name {
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     margin: 0px 0px 14px;
     line-height: 40px;
     @media screen and (min-width: 768px) {
+      font-size: 2.2rem;
       padding: 0 40px 0 0;
     }
   }
@@ -259,11 +265,11 @@ export default {
   &__description {
     font-size: 1.1rem;
     margin: 0px 0 29px;
-    padding: 0 50px 0 0;
     font-style: italic;
     color: #4f4f4f;
     line-height: 30px;
-    @media screen and(min-width:768) {
+    @media screen and(min-width:768px) {
+      padding: 0 50px 0 0;
       /* width: 420px; */
     }
   }

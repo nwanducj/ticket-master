@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="main"
-    role="dialog"
-    aria-label="Proceed to check items and make payment"
-  >
+  <div class="main">
     <div class="list">
       <div class="mt-2">
         <button class="closeBtn" @click="close">
@@ -44,64 +40,8 @@
               {{ getFormattedPrice(varieties.price) }}
             </div>
             <div class="quantity">
-              <button
-                class="add"
-                @click="decreaseQyt(i)"
-                aria-label="decrease quantity"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="region"
-                  aria-label="decrease quantity"
-                >
-                  <g filter="url(#filter0_d)">
-                    <circle cx="13" cy="11" r="10" fill="white" />
-                    <path
-                      d="M16 9C17.1046 9 18 9.89543 18 11C18 12.1046 17.1046 13 16 13H10C8.89543 13 8 12.1046 8 11C8 9.89543 8.89543 9 10 9H16Z"
-                      fill="#828282"
-                    />
-                  </g>
-                  <defs>
-                    <filter
-                      id="filter0_d"
-                      x="0"
-                      y="0"
-                      width="24"
-                      height="24"
-                      filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
-                    >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                      />
-                      <feOffset dx="-1" dy="1" />
-                      <feGaussianBlur stdDeviation="1" />
-                      <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow"
-                        result="shape"
-                      />
-                    </filter>
-                  </defs>
-                </svg>
-              </button>
+              <min-btn @buttonClicked="decreaseQyt(i)" />
+
               <div class="qyt">{{ varieties.qyt }}</div>
               <button
                 class="add"
@@ -430,6 +370,7 @@ button {
     background-color: #f2f2f2;
     display: flex;
     height: 100vh;
+    z-index: 8;
   }
   .event {
     display: flex;

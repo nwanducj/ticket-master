@@ -15,7 +15,6 @@ const routes = [
     name: 'Event',
     component: Event
   },
-
   {
     path: '/ticket-request',
     name: 'Ticket Request',
