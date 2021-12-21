@@ -19,7 +19,15 @@
       <div class="event" v-for="i in 36" :key="i">
         <a href="/event">
           <img src="@/assets/images/Event-image.png" class="image" />
-          <span class="event__date">8TH DECEMBER 2021</span>
+          <span class="event__date">
+            {{
+              ordinal_suffix_of(new Date().getDate()) +
+              "  " +
+              months[new Date().getMonth()] +
+              " " +
+              new Date().getFullYear()
+            }}</span
+          >
           <h5 class="event__name" id="caption">Wizkid Made In Lagos</h5>
           <div class="event__price">
             <span>NGN 5,000</span> - <span>NGN 200,000</span>
@@ -54,6 +62,20 @@ export default {
     return {
       loading: true,
       events: [],
+      months: [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ],
     };
   },
   components: {
@@ -61,7 +83,22 @@ export default {
     Search,
     LoadButton,
   },
-  methods: {},
+  methods: {
+    ordinal_suffix_of(i) {
+      var j = i % 10,
+        k = i % 100;
+      if (j == 1 && k != 11) {
+        return i + "ST";
+      }
+      if (j == 2 && k != 12) {
+        return i + "ND";
+      }
+      if (j == 3 && k != 13) {
+        return i + "RD";
+      }
+      return i + "TH";
+    },
+  },
   created() {
     axios
       .get("https://eventsflw.herokuapp.com/v1/events", {

@@ -7,7 +7,15 @@
             <img src="@/assets/images/Event-image-1.png" />
           </div>
           <div class="event__one" role="article">
-            <p class="event__date__top">{{ new Date().toDateString() }}</p>
+            <p class="event__date__top">
+              {{
+                ordinal_suffix_of(new Date().getDate()) +
+                "  " +
+                months[new Date().getMonth()] +
+                " " +
+                new Date().getFullYear()
+              }}
+            </p>
             <h1 class="event__name btn">
               Big Wiz Event At LandMark Oniru, Lagos. Special Event. Attend
               Tommorrow
@@ -128,6 +136,20 @@ export default {
       event: {},
       loading: false,
       completeSuccess: false,
+      months: [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ],
     };
   },
   components: {
@@ -144,10 +166,25 @@ export default {
     }),
   },
   methods: {
+    ordinal_suffix_of(i) {
+      var j = i % 10,
+        k = i % 100;
+      if (j == 1 && k != 11) {
+        return i + "ST";
+      }
+      if (j == 2 && k != 12) {
+        return i + "ND";
+      }
+      if (j == 3 && k != 13) {
+        return i + "RD";
+      }
+      return i + "TH";
+    },
     getFormattedPrice: function (price) {
       price;
       return formatCurrency(price);
     },
+
     getDate(date) {
       let new_date = new Date(date);
       let formated_date = new_date.toLocaleString("en-US", {
