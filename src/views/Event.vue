@@ -231,13 +231,12 @@ export default {
     this.loading = true;
     try {
       axios
-        .get(`https://eventsflw.herokuapp.com/v1/events/${id}`)
+        .get(`https://afri-functions.herokuapp.com/api/events/${id}`)
         .then((response) => {
           let list = response.data;
           this.event = list.data;
           this.loading = false;
           this.completeSuccess = this.$route.query.paid;
-          // this.completeSuccess = false;
         })
         .catch((err) => {
           console.log(err);
@@ -427,3 +426,4 @@ export default {
   }
 }
 </style>
+
