@@ -3,31 +3,39 @@
     <overlay>
       <div class="event" v-if="event" role="region" aria-label="Event">
         <div class="event__detail">
-          <div class="event__image" role="img" :aria-label="event.description">
-            <img src="@/assets/images/Event-image-1.png" />
+          <div class="event__image" role="img" :aria-label="event.Info">
+            <img :src="event.Episode.SummaryJSON.Image" />
           </div>
           <div class="event__one" role="article">
             <p class="event__date__top">
               {{
-                ordinal_suffix_of(new Date().getDate()) +
+                ordinal_suffix_of(new Date(event.Episode.StartDate).getDate()) +
                 "  " +
-                months[new Date().getMonth()] +
+                months[new Date(event.Episode.StartDate).getMonth()] +
                 " " +
-                new Date().getFullYear()
+                new Date(event.Episode.StartDate).getFullYear()
               }}
             </p>
             <h1 class="event__name btn">
-              Big Wiz Event At LandMark Oniru, Lagos. Special Event. Attend
-              Tommorrow
+              {{ event.Episode.Name }}
             </h1>
             <p class="event__description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea
-              dolores maiatur,dolor sit amet consectetur, adipisicing elit. Ea
-              dolores maiatur, modi quibusdam odit?
+              {{ event.Episode.Info }}
             </p>
             <div v-if="event" class="event__price">
-              <span>{{ getFormattedPrice(5000) }}</span> -
-              <span>{{ getFormattedPrice(10000) }}</span>
+              <span
+                >{{ event.Episode.SummaryJSON.Currency
+                }}{{
+                  getFormattedPrice(event.Episode.SummaryJSON.MinPrice)
+                }}</span
+              >
+              -
+              <span
+                >{{ event.Episode.SummaryJSON.Currency
+                }}{{
+                  getFormattedPrice(event.Episode.SummaryJSON.MaxPrice)
+                }}</span
+              >
             </div>
             <div class="btn">
               <big-button
@@ -41,7 +49,7 @@
           <div class="event__sec">
             <h6 class="event__date">VENUE</h6>
             <p class="event__fulldate">
-              Eko Atlantic Beach, Off Ahmadu Bello Way, Victoria Island, Lagos.
+              {{ event.Episode.Address }}
             </p>
 
             <a class="event__direction">
@@ -88,7 +96,7 @@
           <div class="event__sec">
             <h6 class="event__date">DATE AND TIME</h6>
             <p class="event__fulldate">
-              {{ new Date().toDateString() }}
+              {{ new Date(event.Episode.StartDate).toDateString() }}
             </p>
             <h6 class="event__links">SOCIAL LINKS</h6>
             <ul role="list">
@@ -133,7 +141,7 @@ export default {
     return {
       showPayment: false,
       register: false,
-      event: {},
+      event: null,
       loading: false,
       completeSuccess: false,
       months: [
@@ -181,7 +189,6 @@ export default {
       return i + "TH";
     },
     getFormattedPrice: function (price) {
-      price;
       return formatCurrency(price);
     },
 
@@ -233,10 +240,9 @@ export default {
       axios
         .get(`https://afri-functions.herokuapp.com/api/events/${id}`)
         .then((response) => {
-          let list = response.data;
-          this.event = list.data;
+          this.event = response.data.data.event;
+          console.log(this.event);
           this.loading = false;
-          this.completeSuccess = this.$route.query.paid;
         })
         .catch((err) => {
           console.log(err);

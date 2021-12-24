@@ -16,27 +16,35 @@
     </div>
 
     <div class="events">
-      <div class="event" v-for="i in 36" :key="i">
-        <a href="/event">
-          <img src="@/assets/images/Event-image.png" class="image" />
+      <div class="event" v-for="(event, i) in events" :key="i">
+        <a :href="`/event/${event._id}`">
+          <img :src="event.Episode.SummaryJSON.Image" class="image" />
           <span class="event__date">
             {{
-              ordinal_suffix_of(new Date().getDate()) +
+              ordinal_suffix_of(new Date(event.Episode.StartDate).getDate()) +
               "  " +
-              months[new Date().getMonth()] +
+              months[new Date(event.Episode.StartDate).getMonth()] +
               " " +
-              new Date().getFullYear()
+              new Date(event.Episode.StartDate).getFullYear()
             }}</span
           >
-          <h5 class="event__name" id="caption">Wizkid Made In Lagos</h5>
+          <h5 class="event__name" id="caption">{{ event.Episode.Name }}</h5>
           <div class="event__price">
-            <span>NGN 5,000</span> - <span>NGN 200,000</span>
+            <span
+              >{{ event.Episode.SummaryJSON.Currency }}
+              {{ formattedCurrency(event.Episode.SummaryJSON.MinPrice) }}</span
+            >
+            -
+            <span
+              >{{ event.Episode.SummaryJSON.Currency }}
+              {{ formattedCurrency(event.Episode.SummaryJSON.MaxPrice) }}</span
+            >
           </div>
         </a>
       </div>
     </div>
     <div class="more">
-      <LoadButton :text="'LOAD MORE'" />
+      <LoadButton :text="'LOAD MORE'" @buttonClicked="loadMore" />
     </div>
     <footer>
       <p>Copyright 2019. Flutterwave Inc</p>
@@ -55,6 +63,7 @@
 import LoadingScreen from "../components/LoadingScreen.vue";
 import LoadButton from "../components/LoadButton.vue";
 import Search from "../components/Search.vue";
+import { formatCurrency } from "../static/utils";
 const axios = require("axios");
 export default {
   name: "Home",
@@ -62,6 +71,7 @@ export default {
     return {
       loading: true,
       events: [],
+      page: 1,
       months: [
         "JANUARY",
         "FEBRUARY",
@@ -84,6 +94,29 @@ export default {
     LoadButton,
   },
   methods: {
+    loadMore() {
+      this.page += 1;
+      axios
+        .get(
+          `https://afri-functions.herokuapp.com/api/events?page=${this.page}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          response.data.data.events.docs.map((item) => this.events.push(item));
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
+    },
+    formattedCurrency(amount) {
+      return formatCurrency(amount);
+    },
     ordinal_suffix_of(i) {
       var j = i % 10,
         k = i % 100;
@@ -101,15 +134,15 @@ export default {
   },
   created() {
     axios
-      .get("https://eventsflw.herokuapp.com/v1/events", {
+      .get(`https://afri-functions.herokuapp.com/api/events`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        let list = response.data;
-        this.events = list.data.events;
+        console.log(response.data.data.events);
+        this.events = response.data.data.events.docs.map((item) => item);
         this.loading = false;
         console.log(this.events);
       })
