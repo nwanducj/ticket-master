@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('buttonClicked')">{{ text }}</button>
+  <button @click="$emit('buttonClicked')" :type="type">{{ text }}</button>
 </template>
 <script>
 export default {
@@ -8,6 +8,10 @@ export default {
     text: {
       type: String,
       required: true,
+    },
+    type: {
+      type: String,
+      default: "button",
     },
   },
 };

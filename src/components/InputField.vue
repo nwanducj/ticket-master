@@ -1,7 +1,7 @@
 <template>
   <div>
     <label for="email address" class="label">{{ label }}</label>
-    <input type="text" v-model="word" />
+    <input type="text" v-model="word" @change="$emit('get', word)" required />
   </div>
 </template>
 <script>
@@ -21,6 +21,9 @@ export default {
     return {
       word: this.text,
     };
+  },
+  methods: {
+    // this.$emit('get', this.word)
   },
 };
 </script>

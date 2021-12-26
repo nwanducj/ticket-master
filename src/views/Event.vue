@@ -29,8 +29,18 @@
                   getFormattedPrice(event.Episode.SummaryJSON.MinPrice)
                 }}</span
               >
-              -
               <span
+                v-if="
+                  event.Episode.SummaryJSON.MaxPrice !=
+                  event.Episode.SummaryJSON.MinPrice
+                "
+                >-</span
+              >
+              <span
+                v-if="
+                  event.Episode.SummaryJSON.MaxPrice !=
+                  event.Episode.SummaryJSON.MinPrice
+                "
                 >{{ event.Episode.SummaryJSON.Currency
                 }}{{
                   getFormattedPrice(event.Episode.SummaryJSON.MaxPrice)
@@ -121,7 +131,11 @@
         style="position: fixed; height: 100vh; top: 0; z-index: 30"
       />
     </overlay>
-    <MakePayment v-if="showPayment" @close="showPayment = false" />
+    <MakePayment
+      v-if="showPayment"
+      @close="showPayment = false"
+      :event="event"
+    />
   </div>
 </template>
 
@@ -192,15 +206,6 @@ export default {
       return formatCurrency(price);
     },
 
-    getDate(date) {
-      let new_date = new Date(date);
-      let formated_date = new_date.toLocaleString("en-US", {
-        day: "numeric", // numeric, 2-digit
-        year: "numeric", // numeric, 2-digit
-        month: "long", // numeric, 2-digit, long, short, narrow
-      });
-      return formated_date;
-    },
     gotoPayment: function () {
       if (!this.user) {
         this.register = true;
@@ -229,10 +234,7 @@ export default {
       this.completeSuccess = false;
     },
   },
-  mounted() {
-    this.$route;
-    // this.completeSuccess = this.$route.query.paid;
-  },
+  mounted() {},
   created() {
     let id = this.$route.params.event_id;
     this.loading = true;

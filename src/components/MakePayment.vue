@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" v-if="TicketTypes != null">
     <div class="one">
       <div>
         <button class="closeBtn" @click="$emit('close')">
@@ -32,16 +32,16 @@
         <div class="title">Wizkid Live in Concert</div>
         <div class="date">{{ new Date().toDateString() }}</div>
       </div>
-      <div v-for="i in 3" :key="i">
+      <div v-for="(eventType, i) in TicketTypes" :key="i">
         <div class="event tm">
-          <p class="event__type">Tabel for 5</p>
+          <p class="event__type">{{ eventType.Name }}</p>
           <p class="event__price">
-            {{ getFormattedPrice(1000000) }}
+            {{ eventType.CurrencyName + getFormattedPrice(eventType.Price) }}
           </p>
           <div class="quantity">
-            <min-btn @buttonClicked="decreaseQyt(i)" />
-            <span class="qty">{{ i }}</span>
-            <add-btn @buttonClicked="increaseQyt(i)" />
+            <min-btn @buttonClicked="eventType.quantity -= 1" />
+            <span class="qty">{{ eventType.quantity }}</span>
+            <add-btn @buttonClicked="eventType.quantity += 1" />
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="two" :class="summaryOpen ? '' : 'hidden'">
-      <div class="summary">
+      <div class="summary" v-if="!showRegister">
         <div class="summary__title">
           <span>ORDER SUMMARY</span>
           <button class="close" @click="summaryOpen = false">
@@ -62,28 +62,37 @@
           </button>
         </div>
 
-        <div class="flex" v-for="i in 4" :key="i">
-          <span>3 - Table for One</span>
-          <span class="price">{{ getFormattedPrice(2000 * 5) }}</span>
+        <div v-for="(eventType, i) in TicketTypes" :key="i">
+          <div class="flex" v-if="eventType.quantity > 0">
+            <span>{{ eventType.Name }}</span>
+            <span class="price">{{
+              eventType.CurrencyName +
+              getFormattedPrice(eventType.Price * eventType.quantity)
+            }}</span>
+          </div>
         </div>
 
         <div class="pay">
           <div class="flex">
             <span>Sub-total</span>
-            <span class="price">{{ getFormattedPrice(2000) }}</span>
+            <span class="price">{{
+              TicketTypes[0].CurrencyName + getFormattedPrice(getSubTotal)
+            }}</span>
           </div>
           <div class="flex">
             <span>VAT</span>
-            <span class="price">{{ getFormattedPrice(5000) }}</span>
+            <span class="price">{{
+              TicketTypes[0].CurrencyName + getFormattedPrice(500)
+            }}</span>
           </div>
           <div class="flex">
             <span>TOTAL PAYMENT</span>
             <span class="price--total">
-              {{ getFormattedPrice(2000 + 5) }}
+              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal) }}
             </span>
           </div>
         </div>
-        <BigButton @buttonClicked="goNext" :text="'CONTINUE'" />
+        <BigButton @buttonClicked="showRegister = true" :text="'CONTINUE'" />
         <div class="guarantee">
           <div class="guarantee__logo">
             <img src="@/assets/images/verified.svg" alt="" />
@@ -94,9 +103,13 @@
           </div>
         </div>
       </div>
-      <div class="summary">
-        <div class="holder__main" @click="goPrev">
-          <button class="back" aria-label="go back">
+      <div class="summary" v-if="showRegister">
+        <div class="holder__main">
+          <button
+            class="back"
+            aria-label="go back"
+            @click="showRegister = false"
+          >
             <svg
               width="20"
               height="20"
@@ -123,22 +136,37 @@
             Go back
           </button>
         </div>
-        <form role="form" aria-label="User Information">
-          <InputField label="Full name" />
-          <InputField label="Email address" />
-          <InputField label="Phone number" />
-        </form>
-        <div class="flex">
-          <span>TOTAL PAYMENT</span>
-          <span class="price--total">
-            {{ getFormattedPrice(2000 + 5) }}
-          </span>
-        </div>
+        <form role="form" aria-label="User Information" @submit="makePayment()">
+          <InputField
+            :text="user.fullname"
+            label="Full name"
+            @get="user.fullname = $event.value"
+          />
+          <InputField
+            :text="user.email"
+            label="Email address"
+            @get="user.email = $event.value"
+          />
+          <InputField
+            :text="user.phone"
+            label="Phone number"
+            @get="user.phone = $event.value"
+          />
+          <div class="flex">
+            <span>TOTAL PAYMENT</span>
+            <span class="price--total">
+              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal) }}
+            </span>
+          </div>
 
-        <BigButton
-          @buttonClicked="goNext"
-          :text="'PAY ' + getFormattedPrice(20000)"
-        />
+          <BigButton
+            @buttonClicked="makePayment()"
+            :type="'submit'"
+            :text="
+              'PAY ' + TicketTypes[0].CurrencyName + getFormattedPrice(getTotal)
+            "
+          />
+        </form>
 
         <div class="guarantee">
           <div class="guarantee__logo">
@@ -158,7 +186,6 @@
 // @ is an alias to /src
 import { formatCurrency } from "../static/utils.js";
 import BigButton from "@/components/BigButton.vue";
-// import BaseButton from "@/components/BaseButton.vue";
 import AddBtn from "@/components/AddBtn.vue";
 import MinBtn from "@/components/MinBtn.vue";
 import InputField from "@/components/InputField.vue";
@@ -171,15 +198,15 @@ export default {
       userDto: "getUser",
       cart: "getCartList",
     }),
-    totalPayment() {
+    getSubTotal() {
       let total = 0;
-      this.cart.varieties.forEach((item) => {
-        if (item.qty > 0) {
-          total += item.price * item.qty * 1;
-        }
+      this.TicketTypes.forEach((item) => {
+        total += item.Price * item.quantity;
       });
-
-      return total + this.cart.vat;
+      return total;
+    },
+    getTotal() {
+      return 500 + this.getSubTotal;
     },
   },
   components: {
@@ -190,65 +217,70 @@ export default {
   },
   data() {
     return {
-      summaryOpen: false,
-      user: {
-        fullname: "",
-        email: "",
-        phoneNumber: "",
+      paymentData: {
+        public_key: "FLWPUBK_TEST-65c6459da4b3fa0ae7b0d22ca0dd10b3-X",
+        tx_ref: "3443DD#",
+        amount: this.getTotal,
+        currency: this.event.Episode.SummaryJSON.currency,
+        country: "NG",
+        phone_number: "08102829960",
+        payment_options: "card",
+        customer: {
+          name: `Chidike Nwandu`,
+          email: "chidikenwandu@gmail.com",
+        },
+        callback: (response) => this.callbackFlutter(response),
+        customizations: {
+          title: "Ticket Master",
+          description: "GET A TICKET",
+        },
+        close: this.closeFlutter,
       },
-      props: [],
-      cartList: [],
-      continueClicked: false,
+      summaryOpen: false,
+      showRegister: false,
+      TicketTypes: null,
+      user: {
+        fullname: "Chidike Nwandu",
+        email: "chidikenwandu@gmail.com",
+        phone: "08102829960",
+      },
     };
   },
+
   methods: {
+    referenceFlutter() {
+      return `FUND_ACCOUNT-${this.user.firstName}-${
+        this.getTotal
+      }-${new Date()}`;
+    },
     getFormattedPrice: function (price) {
       return formatCurrency(price);
-    },
-    getDate(date) {
-      let new_date = new Date(date);
-      let formated_date = new_date.toLocaleString("en-US", {
-        day: "numeric", // numeric, 2-digit
-        year: "numeric", // numeric, 2-digit
-        month: "long", // numeric, 2-digit, long, short, narrow
-      });
-      return formated_date;
     },
     close: function () {
       this.$emit("closePayment");
     },
-    clickContinue: function () {
-      this.continueClicked = true;
-      const script = document.createElement("script");
-      script.src = "https://ravemodal-dev.herokuapp.com/v3.js";
-      document.getElementsByTagName("head")[0].appendChild(script);
+    makePayment() {
+      // if (!this.user.email || !this.user.phone || !this.user.fullname) {
+      //   return;
+      // }
+      this.payWithFlutterwave(this.paymentData);
     },
-    goBack: function () {
-      this.continueClicked = false;
+    callbackFlutter: function (response) {
+      console.log("hi");
+      console.log(response);
     },
-    increaseQyt(i) {
-      this.cart.varieties[i].qty += 1;
-      this.$store.dispatch("updateCart", this.cart);
-    },
-    decreaseQyt(i) {
-      if (this.cart.varieties[i].qty > 0) {
-        this.cart.varieties[i].qty -= 1;
-        this.$store.dispatch("updateCart", this.cart);
-      }
-      if (
-        this.cart.varieties[0].qty == 0 &&
-        this.cart.varieties[1].qty == 0 &&
-        this.cart.varieties[2].qty == 0
-      ) {
-        this.close();
-      }
+    closeFlutter: function () {
+      console.log("closing");
+      this.$router.push("/");
     },
   },
   mounted() {
-    if (this.userDto) {
-      this.user = this.userDto;
-    }
+    this.TicketTypes = this.event.TicketTypes.map((item) => {
+      return { ...item, quantity: 0 };
+    });
+    this.TicketTypes[0].quantity = 1;
   },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>
@@ -269,6 +301,7 @@ export default {
 .one {
   width: 80%;
   margin: 0 auto;
+  overflow-y: auto;
   @media screen and (min-width: 768px) {
     width: 50%;
     margin-left: 7%;
@@ -279,6 +312,7 @@ export default {
   min-height: 100vh;
   width: 100%;
   position: fixed;
+  overflow-y: auto;
   top: 0;
   left: 0;
 
@@ -344,11 +378,13 @@ export default {
   align-items: center;
   font-weight: 400;
   margin: 10px 0;
+
   img {
     margin-right: 10px;
   }
   &__text {
-    line-height: 3px;
+    line-height: 5px;
+    font-size: 0.85rem;
   }
 }
 

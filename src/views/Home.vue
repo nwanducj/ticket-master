@@ -34,8 +34,18 @@
               >{{ event.Episode.SummaryJSON.Currency }}
               {{ formattedCurrency(event.Episode.SummaryJSON.MinPrice) }}</span
             >
-            -
             <span
+              v-if="
+                event.Episode.SummaryJSON.MaxPrice !=
+                event.Episode.SummaryJSON.MinPrice
+              "
+              >-</span
+            >
+            <span
+              v-if="
+                event.Episode.SummaryJSON.MaxPrice !=
+                event.Episode.SummaryJSON.MinPrice
+              "
               >{{ event.Episode.SummaryJSON.Currency }}
               {{ formattedCurrency(event.Episode.SummaryJSON.MaxPrice) }}</span
             >

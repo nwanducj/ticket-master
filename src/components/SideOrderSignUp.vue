@@ -141,7 +141,6 @@ export default {
     getFormattedPrice: function (price) {
       return formatCurrency(price);
     },
-
     atFlutterwave: function () {
       window.FlutterwaveCheckout({
         public_key: this.flwKey,

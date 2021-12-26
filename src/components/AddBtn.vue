@@ -1,7 +1,7 @@
 <template>
   <button
     class="add"
-    @click="$emit(buttonClicked)"
+    @click="$emit('buttonClicked')"
     aria-label="Increase quantity"
   >
     <svg
