@@ -142,7 +142,7 @@ export default {
       return i + "TH";
     },
   },
-  created() {
+  mounted() {
     axios
       .get(`https://afri-functions.herokuapp.com/api/events`, {
         headers: {
@@ -151,10 +151,8 @@ export default {
         },
       })
       .then((response) => {
-        console.log(response.data.data.events);
         this.events = response.data.data.events.docs.map((item) => item);
         this.loading = false;
-        console.log(this.events);
       })
       .catch((err) => {
         console.log(err);

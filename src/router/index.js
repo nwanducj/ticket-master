@@ -11,7 +11,6 @@ const routes = [
   },
   {
     path: '/event/:event_id',
-    // path: '/event',
     name: 'Event',
     component: Event
   },

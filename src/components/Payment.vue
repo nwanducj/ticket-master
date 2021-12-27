@@ -200,15 +200,6 @@ export default {
     getFormattedPrice: function (price) {
       return formatCurrency(price);
     },
-    getDate(date) {
-      let new_date = new Date(date);
-      let formated_date = new_date.toLocaleString("en-US", {
-        day: "numeric", // numeric, 2-digit
-        year: "numeric", // numeric, 2-digit
-        month: "long", // numeric, 2-digit, long, short, narrow
-      });
-      return formated_date;
-    },
     close: function () {
       this.$emit("closePayment");
     },
@@ -220,23 +211,6 @@ export default {
     },
     goBack: function () {
       this.continueClicked = false;
-    },
-    increaseQyt(i) {
-      this.cart.varieties[i].qyt += 1;
-      this.$store.dispatch("updateCart", this.cart);
-    },
-    decreaseQyt(i) {
-      if (this.cart.varieties[i].qyt > 0) {
-        this.cart.varieties[i].qyt -= 1;
-        this.$store.dispatch("updateCart", this.cart);
-      }
-      if (
-        this.cart.varieties[0].qyt == 0 &&
-        this.cart.varieties[1].qyt == 0 &&
-        this.cart.varieties[2].qyt == 0
-      ) {
-        this.close();
-      }
     },
   },
   mounted() {

@@ -30,13 +30,25 @@
       </div>
       <div class="register__form">
         <div class="desc">
-          <form role="form" aria-label="User Information">
-            <input-field :label="'Full name'" :text="fullname" />
-            <input-field :label="'Phone Number'" :text="phoneNumber" />
-            <input-field :label="'Email Address'" :text="email" />
+          <form role="form" aria-label="User Information" @submit="setUser">
+            <InputField
+              :text="user.fullname"
+              label="Full name"
+              @get="(value) => (user.fullname = value)"
+            />
+            <InputField
+              :text="user.email"
+              label="Email address"
+              @get="(value) => (user.email = value)"
+            />
+            <InputField
+              :text="user.phone"
+              label="Phone number"
+              @get="(value) => (user.phone = value)"
+            />
+            <BigButton @buttonClicked="setUser" :text="'REGISTER'" />
           </form>
         </div>
-        <BigButton @buttonClicked="setUser" :text="'REGISTER'" />
       </div>
     </div>
   </black-overlay>
@@ -50,9 +62,11 @@ export default {
   name: "Register",
   data() {
     return {
-      fullname: "",
-      email: "",
-      phoneNumber: "",
+      user: {
+        fullname: "Chidike Nwandu",
+        email: "chidikenwandu@gmail.com",
+        phone: "08102829960",
+      },
     };
   },
   components: {
@@ -65,16 +79,8 @@ export default {
       this.$emit("closeRegister");
     },
     setUser: function () {
-      this.$store
-        .dispatch("setUser", {
-          email: this.email,
-          phoneNumber: this.phoneNumber,
-          fullname: this.fullname,
-        })
-        .then(() => {
-          this.$emit("continueFromRegister");
-          this.close();
-        });
+      this.$emit("continueFromRegister", this.user);
+      this.$emit("closeRegister");
     },
   },
 };

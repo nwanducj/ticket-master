@@ -1,16 +1,28 @@
 <template>
   <div>
     <overlay>
-      <div class="heading" v-show="false">
-        <p id="caption">
-          Enter your email and we’ll send your tickets right away!
-        </p>
+      <div v-show="!success">
+        <div class="heading">
+          <p id="caption">
+            Enter your email and we’ll send your tickets right away!
+          </p>
+        </div>
+        <div class="card">
+          <form @submit="payment">
+            <input-field
+              :label="'Email Address'"
+              :text="'chidikenwandu@gmail.com'"
+              @get="(value) => (email = value)"
+            />
+            <big-button @buttonClicked="payment" :text="'PAY N110,000'" />
+          </form>
+        </div>
       </div>
       <div
         class="card card--center"
         role="region"
         aria-labelledby="descp"
-        v-show="true"
+        v-show="success"
       >
         <img src="@/assets/images/check.svg" />
         <p id="descp" class="descp">
@@ -21,12 +33,6 @@
           @buttonClicked="$router.push('/')"
           :text="'BUY MORE TICKETS'"
         />
-      </div>
-      <div class="card" v-show="false">
-        <form>
-          <input-field :label="'Email Address'" />
-          <big-button @buttonClicked="payment" :text="'PAY N110,000'" />
-        </form>
       </div>
     </overlay>
   </div>
@@ -49,11 +55,14 @@ export default {
     return {
       success: false,
       text: "",
+      email: null,
     };
   },
   methods: {
     payment: function () {
-      this.success = true;
+      if (this.email) {
+        this.success = true;
+      }
     },
   },
   created() {},

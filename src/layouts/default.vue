@@ -82,13 +82,6 @@ export default {
     toggleMenu() {
       this.clickedMenu = !this.clickedMenu;
     },
-    gotoLink() {
-      this.clickedMenu = false;
-      this.$router.push({
-        path: "/ticket-request",
-        query: { ticketrequest: true },
-      });
-    },
   },
   created() {},
 };

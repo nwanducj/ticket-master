@@ -1,5 +1,5 @@
 <template>
-  <div class="main" v-if="TicketTypes != null">
+  <div class="main" v-if="TicketTypes.length > 0">
     <div class="one">
       <div>
         <button class="closeBtn" @click="$emit('close')">
@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="title__holder">
-        <div class="title">Wizkid Live in Concert</div>
+        <div class="title">{{ event.Episode.Name }}</div>
         <div class="date">{{ new Date().toDateString() }}</div>
       </div>
       <div v-for="(eventType, i) in TicketTypes" :key="i">
@@ -88,7 +88,7 @@
           <div class="flex">
             <span>TOTAL PAYMENT</span>
             <span class="price--total">
-              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal) }}
+              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal()) }}
             </span>
           </div>
         </div>
@@ -136,7 +136,7 @@
             Go back
           </button>
         </div>
-        <form role="form" aria-label="User Information" @submit="makePayment()">
+        <form role="form" aria-label="User Information" @submit="makeFlwPay">
           <InputField
             :text="user.fullname"
             label="Full name"
@@ -155,15 +155,16 @@
           <div class="flex">
             <span>TOTAL PAYMENT</span>
             <span class="price--total">
-              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal) }}
+              {{ TicketTypes[0].CurrencyName + getFormattedPrice(getTotal()) }}
             </span>
           </div>
 
           <BigButton
-            @buttonClicked="makePayment()"
-            :type="'submit'"
+            @click="makeFlwPay"
             :text="
-              'PAY ' + TicketTypes[0].CurrencyName + getFormattedPrice(getTotal)
+              'PAY ' +
+              TicketTypes[0].CurrencyName +
+              getFormattedPrice(getTotal())
             "
           />
         </form>
@@ -191,24 +192,8 @@ import MinBtn from "@/components/MinBtn.vue";
 import InputField from "@/components/InputField.vue";
 import { mapGetters } from "vuex";
 export default {
-  name: "MakePayment",
-  props: ["closePayment", "paymentCompleted", "event"],
-  computed: {
-    ...mapGetters({
-      userDto: "getUser",
-      cart: "getCartList",
-    }),
-    getSubTotal() {
-      let total = 0;
-      this.TicketTypes.forEach((item) => {
-        total += item.Price * item.quantity;
-      });
-      return total;
-    },
-    getTotal() {
-      return 500 + this.getSubTotal;
-    },
-  },
+  name: "MakeFlwPayment",
+  props: ["closePayment", "paymentCompleted", "event", "userDto"],
   components: {
     BigButton,
     AddBtn,
@@ -220,11 +205,11 @@ export default {
       paymentData: {
         public_key: "FLWPUBK_TEST-65c6459da4b3fa0ae7b0d22ca0dd10b3-X",
         tx_ref: "3443DD#",
-        amount: this.getTotal,
-        currency: this.event.Episode.SummaryJSON.currency,
+        amount: 0,
+        currency: this.event.Episode.SummaryJSON.Currency,
         country: "NG",
         phone_number: "08102829960",
-        payment_options: "card",
+        payment_options: "card, ussd",
         customer: {
           name: `Chidike Nwandu`,
           email: "chidikenwandu@gmail.com",
@@ -234,11 +219,11 @@ export default {
           title: "Ticket Master",
           description: "GET A TICKET",
         },
-        close: this.closeFlutter,
+        onclose: this.closeFlutter,
       },
       summaryOpen: false,
       showRegister: false,
-      TicketTypes: null,
+      TicketTypes: [],
       user: {
         fullname: "Chidike Nwandu",
         email: "chidikenwandu@gmail.com",
@@ -246,10 +231,25 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      cart: "getCartList",
+    }),
+    getSubTotal() {
+      let total = 0;
+      this.TicketTypes.forEach((item) => {
+        total += item.Price * item.quantity;
+      });
+      return total;
+    },
+  },
 
   methods: {
+    getTotal() {
+      return 500 + this.getSubTotal;
+    },
     referenceFlutter() {
-      return `FUND_ACCOUNT-${this.user.firstName}-${
+      return `FUND_ACCOUNT-${this.user.fullname}-${
         this.getTotal
       }-${new Date()}`;
     },
@@ -259,19 +259,25 @@ export default {
     close: function () {
       this.$emit("closePayment");
     },
-    makePayment() {
-      // if (!this.user.email || !this.user.phone || !this.user.fullname) {
-      //   return;
-      // }
+    makeFlwPay() {
+      if (!this.user.email || !this.user.phone || !this.user.fullname) {
+        return;
+      }
+      this.TicketTypes.forEach((item) => {
+        this.paymentData.amount += item.Price * item.quantity;
+      });
       this.payWithFlutterwave(this.paymentData);
     },
     callbackFlutter: function (response) {
-      console.log("hi");
-      console.log(response);
+      if (response.status == "successful") {
+        this.$emit("close");
+        this.closePaymentModal();
+        this.$emit("completeSuccess");
+      }
     },
     closeFlutter: function () {
-      console.log("closing");
-      this.$router.push("/");
+      this.closePaymentModal();
+      this.$emit("close");
     },
   },
   mounted() {
@@ -279,8 +285,8 @@ export default {
       return { ...item, quantity: 0 };
     });
     this.TicketTypes[0].quantity = 1;
+    this.user = { ...this.userDto };
   },
-  created() {},
 };
 </script>
 <style lang="scss" scoped>
@@ -349,6 +355,7 @@ export default {
 .flex {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   margin: 15px 0;
 }
 .summary {
@@ -400,7 +407,7 @@ export default {
     /* width: 500px; */
     width: 100%;
     &__type {
-      width: 20%;
+      width: 30%;
       font-weight: 600;
     }
     &__price {

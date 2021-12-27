@@ -3,7 +3,7 @@
     <div class="holder" role="dialog" aria-labelledby="dialogTitle">
       <div class="card card--center">
         <div style="float: right">
-          <button class="closeBtn" @click="closeDialog">
+          <button class="closeBtn" @click="$emit('close')">
             <svg
               width="24"
               height="24"
@@ -51,11 +51,7 @@ export default {
     return {};
   },
   props: [],
-  methods: {
-    closeDialog() {
-      this.$router.push("/");
-    },
-  },
+  methods: {},
 };
 </script>
 

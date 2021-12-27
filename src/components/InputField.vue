@@ -22,9 +22,6 @@ export default {
       word: this.text,
     };
   },
-  methods: {
-    // this.$emit('get', this.word)
-  },
 };
 </script>
 <style lang="scss" scoped>

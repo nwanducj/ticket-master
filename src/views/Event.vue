@@ -48,10 +48,7 @@
               >
             </div>
             <div class="btn">
-              <big-button
-                :text="'BUY NOW'"
-                @buttonClicked="showPayment = true"
-              />
+              <big-button :text="'BUY NOW'" @buttonClicked="register = true" />
             </div>
           </div>
         </div>
@@ -118,10 +115,14 @@
             </ul>
           </div>
         </div>
-        <ThankYouMessage class="register" v-show="false" />
+        <ThankYouMessage
+          class="register"
+          @close="completeSuccess = false"
+          v-show="completeSuccess"
+        />
         <register
           class="register"
-          v-show="false"
+          v-if="register"
           @closeRegister="closeRegister"
           @continueFromRegister="continueFromRegister"
         />
@@ -131,10 +132,12 @@
         style="position: fixed; height: 100vh; top: 0; z-index: 30"
       />
     </overlay>
-    <MakePayment
+    <MakeFlwPayment
       v-if="showPayment"
       @close="showPayment = false"
+      @completeSuccess="completeSuccess = true"
       :event="event"
+      :userDto="user"
     />
   </div>
 </template>
@@ -145,9 +148,8 @@ import ThankYouMessage from "../components/ThankYouMessage.vue";
 import LoadingScreen from "../components/LoadingScreen.vue";
 import Register from "../components/Register.vue";
 import Overlay from "../components/Overlay.vue";
-import MakePayment from "../components/MakePayment.vue";
+import MakeFlwPayment from "../components/MakeFlwPayment.vue";
 import BigButton from "../components/BigButton.vue";
-import { mapGetters } from "vuex";
 const axios = require("axios");
 export default {
   name: "Event",
@@ -172,21 +174,22 @@ export default {
         "NOVEMBER",
         "DECEMBER",
       ],
+      user: {
+        fullname: "Chidike Nwandu",
+        email: "chidikenwandu@gmail.com",
+        phone: "08102829960",
+      },
     };
   },
   components: {
     ThankYouMessage,
     Register,
     LoadingScreen,
-    MakePayment,
+    MakeFlwPayment,
     Overlay,
     BigButton,
   },
-  computed: {
-    ...mapGetters({
-      user: "getUser",
-    }),
-  },
+  computed: {},
   methods: {
     ordinal_suffix_of(i) {
       var j = i % 10,
@@ -205,20 +208,10 @@ export default {
     getFormattedPrice: function (price) {
       return formatCurrency(price);
     },
-
-    gotoPayment: function () {
-      if (!this.user) {
-        this.register = true;
-      } else {
-        let event = { ...this.event };
-        this.$store.dispatch("setCartList", event).then((this.loading = false));
-        this.payment = true;
-      }
-    },
-    continueFromRegister() {
-      let event = { ...this.event };
-      this.$store.dispatch("setCartList", event).then((this.loading = false));
-      this.payment = true;
+    continueFromRegister(res) {
+      this.user = { ...res };
+      this.register = false;
+      this.showPayment = true;
     },
     closePayment: function () {
       this.payment = false;
@@ -234,7 +227,6 @@ export default {
       this.completeSuccess = false;
     },
   },
-  mounted() {},
   created() {
     let id = this.$route.params.event_id;
     this.loading = true;
@@ -243,15 +235,13 @@ export default {
         .get(`https://afri-functions.herokuapp.com/api/events/${id}`)
         .then((response) => {
           this.event = response.data.data.event;
-          console.log(this.event);
           this.loading = false;
         })
         .catch((err) => {
-          console.log(err);
           this.loading = false;
+          console.log(err);
         });
     } catch (error) {
-      console.log(error);
       this.loading = false;
     }
   },
