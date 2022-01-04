@@ -4,7 +4,7 @@
       <div class="event" v-if="event" role="region" aria-label="Event">
         <div class="event__detail">
           <div class="event__image" role="img" :aria-label="event.Info">
-            <img :src="event.Episode.SummaryJSON.Image" />
+            <img :src="event.Episode.SummaryJSON.Image" alt="Event Picture" />
           </div>
           <div class="event__one" role="article">
             <p class="event__date__top">

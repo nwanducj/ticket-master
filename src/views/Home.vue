@@ -9,7 +9,7 @@
         <div class="location__handler">
           <p class="location__name"><strong>Lagos, Nigeria</strong></p>
           <button>
-            <img src="@/assets/images/Frame.svg" />
+            <img src="@/assets/images/Frame.svg" alt="Event Picture"/>
           </button>
         </div>
       </div>
